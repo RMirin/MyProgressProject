@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyProgressProject</string>
+    <string name="item_prof_name">%1$s x%2$d</string>
+</resources>
