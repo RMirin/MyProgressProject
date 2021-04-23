@@ -1,14 +1,14 @@
 package com.example.myprogressproject.database
 
 import com.example.myprogressproject.model.ElementOfCurrentProf
-import io.reactivex.Flowable
+import io.reactivex.Single
 
 class ElementsRepository(private val mElementOfCurrentProfDataSource: IElementOCurrentProfDataSource):
     IElementOCurrentProfDataSource {
-    override val allElements: Flowable<MutableList<ElementOfCurrentProf>>
+    override val allElements: Single<MutableList<ElementOfCurrentProf>>
         get() = mElementOfCurrentProfDataSource.allElements
 
-    override fun getElementById(id: Long): Flowable<ElementOfCurrentProf> {
+    override fun getElementById(id: Long): Single<ElementOfCurrentProf> {
         return mElementOfCurrentProfDataSource.getElementById(id)
     }
 

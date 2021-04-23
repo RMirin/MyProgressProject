@@ -1,9 +1,10 @@
 package com.example.myprogressproject.adapter
 
-import android.view.View
-import androidx.recyclerview.widget.RecyclerView
-import android.view.ViewGroup
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myprogressproject.R
 import com.example.myprogressproject.model.ElementOfCurrentProf
@@ -49,31 +50,40 @@ class ItemsOfCurrentProfAdapter(private val buttonClickListener: ButtonClickList
         override fun bind(position: Int) {
             val item = itemsList[position]
             view.item_name_text_view.text = view.context.getString(R.string.item_prof_name, item.name, item.progressTotal)
+            view.progress_bar.getProgressDrawable().mutate()
             view.progress_bar.progress = item.progressCurrent
             view.start_text_view.text = item.progressCurrent.toString()
             view.end_text_view.text = item.progressTotal.toString()
+            view.progress_bar.max = item.progressTotal
+
             // Загружаем картинку
             Glide
                 .with(view.context)
                 .load(item.imageUrl)
                 .into(view.item_image)
             view.plus_ib.setOnClickListener {
-                    if (item.progressCurrent < item.progressTotal) {
+                 if (item.progressCurrent < item.progressTotal) {
                         item.progressCurrent++
                         view.start_text_view.text = item.progressCurrent.toString()
-                        buttonClickListener.updateItem(item)
                         view.plus_ib.isClickable = item.progressCurrent < item.progressTotal
+                        view.progress_bar.progress = item.progressCurrent
+                        buttonClickListener.updateItem(item)
                     }
                 }
             view.minus_ib.setOnClickListener {
                     if (item.progressCurrent <= item.progressTotal && item.progressCurrent > 0) {
                         item.progressCurrent--
                         view.start_text_view.text = item.progressCurrent.toString()
-                        buttonClickListener.updateItem(item)
                         view.minus_ib.isClickable = item.progressCurrent > 0
+                        view.progress_bar.progress = item.progressCurrent
+                        buttonClickListener.updateItem(item)
                     }
                  }
         }
+    }
+
+    fun element(view: View, item : ElementOfCurrentProf) {
+
     }
 
     interface ButtonClickListener {

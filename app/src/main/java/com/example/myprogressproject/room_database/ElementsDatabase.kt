@@ -4,12 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.myprogressproject.model.ElementOfCurrentProf
 import com.example.myprogressproject.room_database.ElementsDatabase.Companion.DATABASE_VERSION
-import androidx.sqlite.db.SupportSQLiteDatabase
 import java.util.concurrent.Executors
-
-
 
 
 @Database(entities = [ElementOfCurrentProf:: class], version = DATABASE_VERSION)

@@ -1,42 +1,40 @@
 package com.example.myprogressproject
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myprogressproject.adapter.ItemsOfCurrentProfAdapter
 import com.example.myprogressproject.adapter.ItemsOfCurrentProfAdapter.ButtonClickListener
-import com.example.myprogressproject.room_database.ElementsDatabase
 import com.example.myprogressproject.database.ElementsRepository
 import com.example.myprogressproject.model.ElementOfCurrentProf
 import com.example.myprogressproject.room_database.ElementDataSource
+import com.example.myprogressproject.room_database.ElementsDatabase
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Action
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(),
     ButtonClickListener {
     override fun updateItem(item: ElementOfCurrentProf) {
         val disposable = Observable.create(ObservableOnSubscribe<Any> { e ->
-            elementsRepository!!.updateElement(item)
+            elementsRepository?.updateElement(item)
             e.onComplete()
         })
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe(io.reactivex.functions.Consumer {
+            .subscribe({
                 //success
             },
-                       io.reactivex.functions.Consumer {
-                           throwable -> Toast.makeText(this@MainActivity, "${throwable.message}", Toast.LENGTH_SHORT).show()
-                       },
-                       Action { loadItems() })
-        compositeDisposable!!.addAll(disposable)
+                {
+                    throwable -> Toast.makeText(this@MainActivity, "${throwable.message}", Toast.LENGTH_SHORT).show()
+                },
+                {})
+        compositeDisposable!!.add(disposable)
     }
 
     val adapter: ItemsOfCurrentProfAdapter = ItemsOfCurrentProfAdapter(this)
@@ -65,16 +63,15 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun loadItems() {
-
         val disposable = elementsRepository!!.allElements
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe({elements -> onGetElementsSuccess(elements)})
+            .subscribe({elements -> onGetElementsSuccess(elements) })
             {
                 throwable -> Toast.makeText(this@MainActivity,"${throwable.message}", Toast.LENGTH_SHORT).show()
             }
-        compositeDisposable!!.addAll(disposable)
-
+        compositeDisposable!!.clear()
+        compositeDisposable!!.add(disposable)
     }
 
     private fun onGetElementsSuccess(elements: MutableList<ElementOfCurrentProf>?) {
