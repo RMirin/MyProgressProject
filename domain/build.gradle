@@ -1,0 +1,69 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    kapt {
+        correctErrorTypes = true
+        generateStubs = true
+    }
+}
+
+dependencies {
+
+    implementation(project(":data"))
+
+    //Base
+    implementation(Dependencies.androidxCoreCoreKtx)
+    implementation(Dependencies.androidxAppcompatAppcompat)
+    implementation(Dependencies.comGoogleAndroidMaterialMaterial)
+
+    //DI
+    implementation(Dependencies.daggerHilt)
+    kapt(Dependencies.daggerHiltCompiler)
+
+    //Reactive
+    implementation(Dependencies.rxJava2RxAndroid)
+    implementation(Dependencies.rxJava3RxJava)
+
+    //Lifecycle
+    implementation(Dependencies.lifecycle)
+    implementation(Dependencies.lifecycleRuntime)
+//    implementation(Dependencies.lifecycleCommonJava8)
+//    implementation(Dependencies.lifecycleExtensions)
+//    implementation "androidx.core:core-ktx:+"
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //Kotlin Coroutines
+    implementation(Dependencies.kotlinCoroutinesCore)
+    implementation(Dependencies.kotlinCoroutinesAndroid)
+    implementation(Dependencies.lifecycleRuntimeKtx)
+}
