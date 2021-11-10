@@ -1,7 +1,8 @@
-package com.example.myprogressproject
+package com.example.myprogressproject.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.myprogressproject.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

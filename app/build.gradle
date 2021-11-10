@@ -28,22 +28,25 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
-        jvmTarget = Versions.jvmTargetVersion
-        useIR = true
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+    kapt {
+        correctErrorTypes true
+        generateStubs = true
     }
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
-    }
-
-    kapt {
-        correctErrorTypes = true
-        generateStubs = true
     }
 }
 
@@ -51,16 +54,30 @@ dependencies {
 
     implementation(project(":domain"))
     implementation(project(":data"))
+    implementation(project(":core"))
 
     //Base
-//    implementation(Dependencies.kotlin)
     implementation(Dependencies.androidxCoreCoreKtx)
     implementation(Dependencies.androidxAppcompatAppcompat)
     implementation(Dependencies.comGoogleAndroidMaterialMaterial)
     implementation(Dependencies.lifecycle)
     implementation(Dependencies.lifecycleRuntime)
+    implementation(Dependencies.kotlin)
 
     //DI
     implementation(Dependencies.daggerHilt)
     kapt(Dependencies.daggerHiltCompiler)
+
+    // Navigation
+    implementation(Dependencies.navigationUI)
+    implementation(Dependencies.navigationFragment)
+
+    //Kotlin Coroutines
+    implementation(Dependencies.kotlinCoroutinesCore)
+    implementation(Dependencies.kotlinCoroutinesAndroid)
+    implementation(Dependencies.lifecycleRuntimeKtx)
+
+    //Glide
+    implementation(Dependencies.glideGlide)
+    kapt(Dependencies.glideCompiler)
 }

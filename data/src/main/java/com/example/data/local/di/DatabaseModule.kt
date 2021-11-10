@@ -2,9 +2,9 @@ package com.example.data.local.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.data.BuildConfig
 import com.example.data.local.dao.ProfessionDao
 import com.example.data.local.db.DatabaseManager
+
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,9 +22,8 @@ object DatabaseModule {
         Room.databaseBuilder(
             context,
             DatabaseManager::class.java,
-            "professions_database"
-        ).fallbackToDestructiveMigration()
-            .build()
+            "professions_db"
+        ).createFromAsset("database/prof_data.db").build()
 
     @Provides
     @Singleton
