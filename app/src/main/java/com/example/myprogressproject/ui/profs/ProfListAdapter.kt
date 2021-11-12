@@ -3,7 +3,7 @@ package com.example.myprogressproject.ui.profs
 import android.view.ViewGroup
 import com.example.core.base.BaseRecyclerViewAdapter
 import com.example.core.base.BaseViewHolder
-import com.example.core.extension.inflateWithBinding
+import com.example.core.base.inflateWithBinding
 import com.example.domain.entity.ProfDataModel
 import com.example.myprogressproject.R
 import com.example.myprogressproject.databinding.ItemProfBinding
