@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+                name="profListAdapterBinding"
+                type="com.example.myprogressproject.ui.crypto.CryptoListAdapter" />
+
+        <variable
+                name="cryptoActionsAdapterBinding"
+                type="com.example.myprogressproject.ui.crypto.actions.CryptoActionsAdapter" />
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@android:color/white">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/appbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stateListAnimator="@null">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                        android:id="@+id/collapsing"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="56dp"
+                            android:orientation="vertical">
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Действия"
+                                android:textSize="@dimen/font_normal"
+                                android:textStyle="bold"
+                                android:layout_marginStart="12dp"
+                                android:textColor="@android:color/black"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/crypto_list_actions_recycler"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:overScrollMode="never"
+                                android:adapter="@{cryptoActionsAdapterBinding}"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+                    <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="16dp"
+                            android:layout_marginStart="@dimen/spacing_normal"
+                            android:layout_marginEnd="@dimen/spacing_normal"
+                            android:layout_marginBottom="@dimen/spacing_small">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                            <TextView
+                                    android:id="@+id/textView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/spacing_small"
+                                    android:layout_marginTop="@dimen/spacing_normal"
+                                    android:text="Общая цена активов"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="16sp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="5 259.75$"
+                                    android:layout_marginStart="@dimen/spacing_small"
+                                    android:layout_marginBottom="@dimen/spacing_normal"
+                                    android:layout_marginTop="@dimen/spacing_normal"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="24sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_normal"
+                                    android:layout_marginEnd="@dimen/spacing_small"
+                                    android:text="Изм за 24ч."
+                                    android:textColor="@android:color/black"
+                                    android:textSize="12sp"
+                                    app:layout_constraintBottom_toBottomOf="@+id/textView"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/spacing_normal"
+                                    android:layout_marginBottom="@dimen/spacing_normal"
+                                    android:layout_marginEnd="@dimen/spacing_small"
+                                    android:text="+0.29%"
+                                    android:textColor="@android:color/holo_green_dark"
+                                    android:textSize="@dimen/font_large"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_collapseMode="pin"
+                            android:background="@android:color/white"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginBottom="@dimen/spacing_small"
+                                android:layout_marginTop="@dimen/spacing_small"
+                                android:src="@drawable/ic_person"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginEnd="12dp"
+                                android:layout_marginBottom="@dimen/spacing_small"
+                                android:layout_marginTop="@dimen/spacing_small"
+                                android:src="@drawable/ic_notification"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            app:layout_constraintGuide_percent="0.5" />
+
+                    <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/guideline3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.8" />
+
+                    <TextView
+                            android:id="@+id/crypto_list_my_portfolio_title_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Мой портфель"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/font_normal"
+                            android:textStyle="bold"
+                            android:layout_marginStart="12dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                            android:id="@+id/search_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:src="@drawable/ic_search"
+                            app:layout_constraintBottom_toBottomOf="@+id/search_et"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/crypto_list_my_portfolio_title_text" />
+
+                    <com.example.core.custom.EnglishEditText
+                            android:id="@+id/search_et"
+                            android:layout_width="0dp"
+                            android:visibility="invisible"
+                            android:focusable="true"
+                            android:hint="Ищи крипту"
+                            android:layout_marginStart="12dp"
+                            android:focusableInTouchMode="true"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:background="@android:color/transparent"
+                            android:textColorHint="@android:color/black"
+                            app:layout_constraintEnd_toStartOf="@+id/capitalization_text"
+                            app:layout_constraintStart_toEndOf="@+id/search_img"
+                            app:layout_constraintTop_toBottomOf="@+id/crypto_list_my_portfolio_title_text" />
+
+                    <TextView
+                            android:id="@+id/capitalization_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_small"
+                            android:textSize="@dimen/font_normal"
+                            android:textStyle="bold"
+                            android:text="Фильтруй базар"
+                            android:visibility="gone"
+                            android:layout_marginEnd="12dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/search_img"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/crypto_list_my_portfolio_title_text" />
+
+                    <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/spacing_normal"
+                            android:text="Коин"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="@dimen/font_small"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/search_et" />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/spacing_normal"
+                            android:text="Цена/зм за 24 ч."
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="@dimen/font_small"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                            app:layout_constraintTop_toBottomOf="@id/search_et" />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/spacing_normal"
+                            android:text="Баланс"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="@dimen/font_small"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/search_et" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/prof_list_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adapter="@{profListAdapterBinding}"
+                    android:visibility="visible"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </LinearLayout>
+
+</layout>

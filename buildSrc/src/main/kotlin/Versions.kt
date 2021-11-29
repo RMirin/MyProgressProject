@@ -41,4 +41,7 @@ object Versions {
 
     //Glide
     const val glideVersion = "4.10.0"
+
+    //Ui
+    const val coordinatorLayoutVersion = "1.1.0"
 }

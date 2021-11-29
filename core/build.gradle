@@ -59,4 +59,8 @@ dependencies {
     implementation(Dependencies.kotlinCoroutinesCore)
     implementation(Dependencies.kotlinCoroutinesAndroid)
     implementation(Dependencies.lifecycleRuntimeKtx)
+
+    //Glide
+    implementation(Dependencies.glideGlide)
+    kapt(Dependencies.glideCompiler)
 }

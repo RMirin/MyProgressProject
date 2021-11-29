@@ -44,4 +44,7 @@ object Dependencies {
     //Glide
     const val glideGlide = "com.github.bumptech.glide:glide:${Versions.glideVersion}"
     const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glideVersion}"
+
+    //Ui
+    const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:${Versions.coordinatorLayoutVersion}"
 }

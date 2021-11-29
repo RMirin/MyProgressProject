@@ -7,7 +7,7 @@
 
     <fragment
             android:id="@+id/profListFragment"
-            android:name="com.example.myprogressproject.ui.profs.ProfListFragment"
+            android:name="com.example.myprogressproject.ui.crypto.CryptoListFragment"
             android:label="ProfListFragment"
-            tools:layout="@layout/fragment_prof_list"/>
+            tools:layout="@layout/fragment_crypto_list"/>
 </navigation>

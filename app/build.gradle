@@ -37,6 +37,7 @@ android {
     }
 
     buildFeatures {
+        viewBinding = true
         dataBinding = true
     }
     kapt {
@@ -68,7 +69,7 @@ dependencies {
     implementation(Dependencies.daggerHilt)
     kapt(Dependencies.daggerHiltCompiler)
 
-    // Navigation
+    //Navigation
     implementation(Dependencies.navigationUI)
     implementation(Dependencies.navigationFragment)
 
@@ -80,4 +81,9 @@ dependencies {
     //Glide
     implementation(Dependencies.glideGlide)
     kapt(Dependencies.glideCompiler)
+
+    //Ui
+    implementation(Dependencies.coordinatorLayout)
+
+    implementation 'com.tradingview:lightweightcharts:3.6.1'
 }
