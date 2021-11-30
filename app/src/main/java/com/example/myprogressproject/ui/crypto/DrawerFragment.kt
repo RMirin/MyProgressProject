@@ -1,23 +1,11 @@
 package com.example.myprogressproject.ui.crypto
 
-import android.os.Bundle
+import com.example.core.base.BaseFragment
+import com.example.myprogressproject.databinding.DrawerFragmentBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-import android.view.ViewGroup
+@AndroidEntryPoint
+class DrawerFragment : BaseFragment<DrawerFragmentBinding>() {
 
-import android.view.LayoutInflater
-import android.view.View
-import androidx.annotation.NonNull
-import androidx.annotation.Nullable
-import androidx.fragment.app.Fragment
-import com.example.myprogressproject.R
-
-class DrawerFragment : Fragment() {
-    @Nullable
-    override fun onCreateView(
-        @NonNull inflater: LayoutInflater,
-        @Nullable container: ViewGroup?,
-        @Nullable savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.drawer_fragment, container, false)
-    }
+    override fun initViewBinding(): DrawerFragmentBinding = DrawerFragmentBinding.inflate(layoutInflater)
 }
