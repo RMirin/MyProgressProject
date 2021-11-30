@@ -1,0 +1,66 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        minSdk 24
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+    kapt {
+        correctErrorTypes = true
+        generateStubs = true
+    }
+}
+
+dependencies {
+
+    //Base
+    implementation(Dependencies.androidxCoreCoreKtx)
+    implementation(Dependencies.androidxAppcompatAppcompat)
+    implementation(Dependencies.comGoogleAndroidMaterialMaterial)
+    implementation(Dependencies.lifecycle)
+    implementation(Dependencies.lifecycleRuntime)
+    implementation(Dependencies.kotlin)
+
+    //DI
+    implementation(Dependencies.daggerHilt)
+    kapt(Dependencies.daggerHiltCompiler)
+
+    //Kotlin Coroutines
+    implementation(Dependencies.kotlinCoroutinesCore)
+    implementation(Dependencies.kotlinCoroutinesAndroid)
+    implementation(Dependencies.lifecycleRuntimeKtx)
+
+    //Glide
+    implementation(Dependencies.glideGlide)
+    kapt(Dependencies.glideCompiler)
+}

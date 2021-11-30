@@ -3,7 +3,7 @@ object Dependencies {
     const val androidxCoreCoreKtx = "androidx.core:core-ktx:${Versions.androidxCoreCoreKtxVersion}"
     const val androidxAppcompatAppcompat = "androidx.appcompat:appcompat:${Versions.androidxAppcompatAppcompatVersion}"
     const val comGoogleAndroidMaterialMaterial = "com.google.android.material:material:${Versions.comGoogleAndroidMaterialMaterialVersion}"
-//    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinVersion}"
+    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinVersion}"
 
     //Room
     const val roomRoomRuntime = "androidx.room:room-runtime:${Versions.roomVersion}"
@@ -35,4 +35,16 @@ object Dependencies {
 
     //Gson
     const val gsonGson = "com.google.code.gson:gson:${Versions.gsonGsonVersion}"
+
+    //Navigation
+    const val navigationFragment =
+        "androidx.navigation:navigation-fragment-ktx:${Versions.navigationVersion}"
+    const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigationVersion}"
+
+    //Glide
+    const val glideGlide = "com.github.bumptech.glide:glide:${Versions.glideVersion}"
+    const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glideVersion}"
+
+    //Ui
+    const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:${Versions.coordinatorLayoutVersion}"
 }

@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">MyProgressProject</string>
     <string name="item_prof_name">%1$s x%2$d</string>
+
+    <string name="crypto_action_verification">Верификация</string>
+    <string name="crypto_action_get">Получить</string>
+    <string name="crypto_action_buy">Купить</string>
+    <string name="crypto_action_send">Отправить</string>
+
+    <string name="bottom_sheet_filter_title">Сортировать по</string>
+    <string name="bottom_sheet_filter_balance">Баланс</string>
+    <string name="bottom_sheet_filter_popular">Популярное</string>
+    <string name="bottom_sheet_filter_top">Топ 10</string>
+    <string name="bottom_sheet_filter_growth">Рост</string>
+    <string name="bottom_sheet_filter_loss">Падение</string>
+    <string name="bottom_sheet_filter_capitalization">Капитализация</string>
 </resources>
