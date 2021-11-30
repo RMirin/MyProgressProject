@@ -8,8 +8,12 @@ import com.example.core.extension.loadContent
 import com.example.domain.entity.CryptoDataModel
 import com.example.myprogressproject.R
 import com.example.myprogressproject.databinding.ItemCryptoBinding
+import com.example.myprogressproject.ui.crypto.actions.CryptoAction
+import com.example.myprogressproject.ui.crypto.actions.CryptoActionsListener
 
-class CryptoListAdapter : BaseRecyclerViewAdapter() {
+class CryptoListAdapter(
+    private val cryptoListListener: CryptoListListener
+) : BaseRecyclerViewAdapter() {
 
     val cryptoDataList: MutableList<CryptoDataModel> = mutableListOf()
 
@@ -29,6 +33,9 @@ class CryptoListAdapter : BaseRecyclerViewAdapter() {
             val item = cryptoDataList[position]
             with(itemCryptoBinding) {
                 cryptoItemBinding = item
+                itemCryptoLayout.setOnClickListener {
+                    cryptoListListener.onCryptoInListClicked()
+                }
             }
         }
     }
@@ -39,4 +46,8 @@ class CryptoListAdapter : BaseRecyclerViewAdapter() {
         this.cryptoDataList.addAll(cryptoDataList)
         notifyDataSetChanged()
     }
+}
+
+interface CryptoListListener {
+    fun onCryptoInListClicked()
 }
