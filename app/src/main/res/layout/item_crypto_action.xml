@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <data>
-
-        <variable
-                name="cryptoActionBinding"
-                type="com.example.myprogressproject.ui.crypto.actions.CryptoAction" />
-    </data>
-
     <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:id="@+id/itemCryptoActionCard"
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/font_small"
             android:layout_marginBottom="@dimen/spacing_small"
@@ -23,13 +17,13 @@
                 android:layout_height="match_parent">
 
             <TextView
+                    android:id="@+id/itemCryptoActionText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_small"
                     android:layout_marginBottom="@dimen/spacing_normal"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/font_small"
-                    app:text="@{cryptoActionBinding.title}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:text="Верификация" />

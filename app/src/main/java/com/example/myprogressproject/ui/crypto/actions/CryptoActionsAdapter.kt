@@ -32,7 +32,10 @@ class CryptoActionsAdapter(
         override fun bind(position: Int) {
 
             with(itemCryptoActionBinding) {
-                cryptoActionBinding = cryptoActionsList[position]
+                itemCryptoActionText.text = this.root.context.getText(cryptoActionsList[position].title)
+                itemCryptoActionCard.setOnClickListener {
+                    cryptoActionsListener.onCryptoActionClicked(cryptoActionsList[position])
+                }
             }
         }
     }
