@@ -21,16 +21,35 @@ import androidx.core.content.ContextCompat.getSystemService
 import com.example.myprogressproject.ui.crypto.filter.FilterBottomSheetFragment
 import com.example.myprogressproject.ui.crypto.filter.FilterBottomSheetListener
 import com.example.myprogressproject.ui.main.MainActivity
-
+import java.lang.RuntimeException
 
 @AndroidEntryPoint
-class CryptoListFragment: BaseFragment<FragmentCryptoListBinding>(), CryptoActionsListener, FilterBottomSheetListener {
+class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActionsListener, FilterBottomSheetListener, CryptoListListener {
+
+    private var mListener: OnFragmentInteractionListener? = null
 
     private var clicked = false
     private val cryptoListViewModel: CryptoListViewModel by viewModels()
 
-    private val cryptoListAdapter: CryptoListAdapter by lazy(LazyThreadSafetyMode.NONE) { CryptoListAdapter() }
+    private val cryptoListAdapter: CryptoListAdapter by lazy(LazyThreadSafetyMode.NONE) { CryptoListAdapter(this) }
     private val cryptoActionsAdapter: CryptoActionsAdapter by lazy(LazyThreadSafetyMode.NONE) { CryptoActionsAdapter(this) }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mListener = if (context is OnFragmentInteractionListener) {
+            context
+        } else {
+            throw RuntimeException(
+                context.toString()
+                        + " must implement OnFragmentInteractionListener"
+            )
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mListener = null
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -100,10 +119,19 @@ class CryptoListFragment: BaseFragment<FragmentCryptoListBinding>(), CryptoActio
     override fun initViewBinding(): FragmentCryptoListBinding = FragmentCryptoListBinding.inflate(layoutInflater)
 
     override fun onCryptoActionClicked(cryptoAction: CryptoAction) {
-
+        Toast.makeText((activity as MainActivity), cryptoAction.name, Toast.LENGTH_SHORT).show()
     }
 
     override fun onFilterClick(filer: Int) {
         Toast.makeText((activity as MainActivity), filer, Toast.LENGTH_SHORT).show()
+    }
+
+    interface OnFragmentInteractionListener {
+        fun openDrawer()
+        fun closeDrawer()
+    }
+
+    override fun onCryptoInListClicked() {
+        mListener?.openDrawer()
     }
 }
