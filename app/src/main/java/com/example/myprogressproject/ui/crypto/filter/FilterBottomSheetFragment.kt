@@ -14,12 +14,10 @@ class FilterBottomSheetFragment(
 
     lateinit var binding: BottomSheetLayoutBinding
 
-    override fun getTheme() = R.style.AppBottomSheetDialogTheme
+    override fun getTheme() = R.style.BottomSheetDialogTheme
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = BottomSheetLayoutBinding.bind(inflater.inflate(R.layout.bottom_sheet_layout, container))
-
-        setStyle(STYLE_NORMAL, R.style.BottomSheetDialog);
 
         val adapter = FilterActionsAdapter(listener)
         adapter.setFilterActions(FilterAction.values())
