@@ -92,8 +92,8 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
 
     private fun initRecycler() {
         with(binding) {
-            profListAdapterBinding = cryptoListAdapter
-            cryptoActionsAdapterBinding = cryptoActionsAdapter
+            profListRecycler.adapter = cryptoListAdapter
+            cryptoListActionsRecycler.adapter = cryptoActionsAdapter
             cryptoListActionsRecycler.addItemDecoration(MemberItemDecoration())
         }
 
