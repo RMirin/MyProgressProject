@@ -32,7 +32,13 @@ class CryptoListAdapter(
 
             val item = cryptoDataList[position]
             with(itemCryptoBinding) {
-                cryptoItemBinding = item
+                itemCryptoImg.loadContent(item.imageUrl)
+                itemCryptoTitleText.text = item.name
+                itemCryptoUndertitleText.text = item.underName
+                itemCryptoTotalPriceInUsd.text = item.totalPrice.toString()
+                itemCryptoTotalCount.text = item.totalCount.toString()
+                itemCryptoCurrentPrice.text = item.currentPrice.toString()
+                itemCryptoPriceChangeInPercent.text = item.priceChange.toString()
                 itemCryptoLayout.setOnClickListener {
                     cryptoListListener.onCryptoInListClicked()
                 }

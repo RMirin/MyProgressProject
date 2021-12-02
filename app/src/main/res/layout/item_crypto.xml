@@ -3,13 +3,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <data>
-
-        <variable
-                name="cryptoItemBinding"
-                type="com.example.domain.entity.CryptoDataModel" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,7 +27,6 @@
                 android:layout_width="@dimen/image_in_list_size"
                 android:layout_height="@dimen/image_in_list_size"
                 android:layout_margin="@dimen/spacing_normal"
-                android:src="@{cryptoItemBinding.imageUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +36,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_normal"
-                android:text="@{cryptoItemBinding.name}"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_normal"
                 app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -57,7 +48,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_normal"
-                android:text="@{cryptoItemBinding.underName}"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="@dimen/font_small"
                 app:layout_constraintBottom_toBottomOf="@+id/item_crypto_img"
@@ -70,7 +60,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_normal"
-                app:setIntText="@{cryptoItemBinding.totalPrice}"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_normal"
                 app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -83,7 +72,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_normal"
-                app:setIntText="@{cryptoItemBinding.totalCount}"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="@dimen/font_small"
                 app:layout_constraintBottom_toBottomOf="@+id/item_crypto_img"
@@ -96,7 +84,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_normal"
-                app:setIntText="@{cryptoItemBinding.currentPrice}"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/font_normal"
                 app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -109,7 +96,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_normal"
-                app:setIntText="@{cryptoItemBinding.priceChange}"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="@dimen/font_small"
                 app:layout_constraintBottom_toBottomOf="@+id/item_crypto_img"

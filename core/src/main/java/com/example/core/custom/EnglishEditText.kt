@@ -2,8 +2,6 @@ package com.example.core.custom
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Rect
-import android.os.Build
 import android.os.LocaleList
 import android.util.AttributeSet
 import android.view.KeyEvent
