@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.core.base.BaseFragment
-import com.example.core.base.launchWhenStarted
+import com.example.core.extension.launchWhenStarted
 import com.example.core.extension.MemberItemDecoration
 import com.example.myprogressproject.databinding.FragmentCryptoListBinding
 import com.example.myprogressproject.ui.crypto.actions.CryptoAction
