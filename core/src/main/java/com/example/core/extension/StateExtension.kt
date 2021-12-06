@@ -1,5 +1,6 @@
-package com.example.core.base
+package com.example.core.extension
 
+import com.example.core.base.State
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.transform
 

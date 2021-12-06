@@ -262,7 +262,6 @@
                     android:id="@+id/prof_list_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:adapter="@{profListAdapterBinding}"
                     android:visibility="visible"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
