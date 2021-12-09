@@ -86,4 +86,6 @@ dependencies {
     implementation(Dependencies.coordinatorLayout)
 
     implementation 'com.tradingview:lightweightcharts:3.6.1'
+
+    implementation 'com.geetest.sensebot:sensebot:4.3.5.1'
 }
