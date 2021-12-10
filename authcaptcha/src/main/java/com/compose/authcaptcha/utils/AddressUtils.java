@@ -1,4 +1,4 @@
-package com.example.data.remote;
+package com.compose.authcaptcha.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

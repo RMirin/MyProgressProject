@@ -1,4 +1,4 @@
-package com.example.data.remote;
+package com.compose.authcaptcha.utils;
 
 /**
  * Created by chensongsong on 2020/8/26.

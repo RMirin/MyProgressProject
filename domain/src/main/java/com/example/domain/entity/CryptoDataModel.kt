@@ -1,7 +1,5 @@
 package com.example.domain.entity
 
-import androidx.annotation.NonNull
-
 data class CryptoDataModel(
    var imageUrl: String = "",
    var name: String = "",
