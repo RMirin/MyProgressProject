@@ -9,6 +9,7 @@ buildscript {
         classpath(ClassPaths.gradle)
         classpath(ClassPaths.kotlinGradlePlugin)
         classpath(ClassPaths.navigationGradlePlugin)
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0'
     }
 }
 

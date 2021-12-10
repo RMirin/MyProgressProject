@@ -27,8 +27,8 @@ import com.geetest.sdk.GT3Listener
 import org.json.JSONObject
 import android.os.AsyncTask
 import com.example.data.remote.HttpUtils
-import com.example.data.remote.AddressUtils
-import com.example.data.remote.RiskTypeEnum
+import com.evgfad.captcha.AddressUtils
+import com.evgfad.captcha.RiskTypeEnum
 import com.example.data.remote.NetRequestUtils
 import java.lang.Exception
 
@@ -45,8 +45,6 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
     private val gt3GeetestUtils: GT3GeetestUtils by lazy(LazyThreadSafetyMode.NONE) { GT3GeetestUtils(activity as MainActivity) }
 
     val gt3ConfigBean = GT3ConfigBean()
-
-    private val riskTypeEnum: RiskTypeEnum = RiskTypeEnum.SLIDE
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -180,24 +178,25 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
              */
             override fun onButtonClick() {
                 Log.e("TAG", "onButtonClick: ")
-                    RequestAPI1(activity as MainActivity, gt3ConfigBean, gt3GeetestUtils, riskTypeEnum).execute()
+                    //RequestAPI1(activity as MainActivity, gt3ConfigBean, gt3GeetestUtils, riskTypeEnum).execute()
+
             }
         }
         gt3GeetestUtils.init(gt3ConfigBean)
         binding.btnGeetest.setGeetestUtils(gt3GeetestUtils)
     }
 
-    internal class RequestAPI1 constructor(val context: Context,
+    /*internal class RequestAPI1 constructor(val context: Context,
                                            val configBean: GT3ConfigBean,
                                            val gt3GeetestUtils: GT3GeetestUtils,
-                                           val riskTypeEnum: RiskTypeEnum
+                                           val riskTypeEnum: com.evgfad.captcha.RiskTypeEnum
     ) :
         AsyncTask<Void?, Void?, JSONObject?>() {
 
         override fun onPostExecute(parmas: JSONObject?) {
             // 继续验证
             Log.i("TAG", "RequestAPI1-->onPostExecute: $parmas")
-            configBean.setApi1Json(parmas)
+            configBean.api1Json = parmas
             gt3GeetestUtils.getGeetest()
         }
 
@@ -209,14 +208,14 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
             var jsonObject: JSONObject? = null
             try {
                 val result: String =
-                    NetRequestUtils.requestGet(AddressUtils.getRegister(context, riskTypeEnum))
+                    NetRequestUtils.requestGet(com.evgfad.captcha.AddressUtils.getRegister(context, riskTypeEnum))
                 jsonObject = JSONObject(result)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
             return jsonObject
         }
-    }
+    }*/
 
     private fun initRecycler() {
         with(binding) {

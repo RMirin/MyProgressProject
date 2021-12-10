@@ -6,8 +6,11 @@ object Versions {
     const val gradleVersion = "4.2.0"
     const val kotlinVersion = "1.5.21"
 
+    //Retrofit
+    const val retrofitVersion = "2.9.0"
+
     //Room
-    const val roomVersion = "2.3.0"
+    const val roomVersion = "2.4.0-alpha03"
 
     //Coroutines
     const val kotlinCoroutinesVersion = "1.3.9"
