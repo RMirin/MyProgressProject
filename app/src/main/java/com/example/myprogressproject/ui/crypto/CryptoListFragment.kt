@@ -6,8 +6,6 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.example.core.base.BaseFragment
 import com.example.core.extension.launchWhenStarted
 import com.example.core.extension.MemberItemDecoration
@@ -26,10 +24,12 @@ import java.lang.RuntimeException
 import com.geetest.sdk.GT3Listener
 import org.json.JSONObject
 import android.os.AsyncTask
-import com.example.data.remote.HttpUtils
-import com.example.data.remote.AddressUtils
-import com.example.data.remote.RiskTypeEnum
-import com.example.data.remote.NetRequestUtils
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.compose.authcaptcha.remote.HttpUtils
+import com.compose.authcaptcha.utils.AddressUtils
+import com.compose.authcaptcha.utils.RiskTypeEnum
+import com.compose.authcaptcha.remote.NetRequestUtils
 import java.lang.Exception
 
 @AndroidEntryPoint
@@ -184,7 +184,6 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
             }
         }
         gt3GeetestUtils.init(gt3ConfigBean)
-        binding.btnGeetest.setGeetestUtils(gt3GeetestUtils)
     }
 
     internal class RequestAPI1 constructor(val context: Context,

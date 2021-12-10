@@ -1,4 +1,4 @@
-package com.example.data.remote;
+package com.compose.authcaptcha.remote;
 
 import android.util.Log;
 

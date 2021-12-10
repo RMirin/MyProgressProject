@@ -6,6 +6,7 @@ import com.example.domain.entity.CryptoDataModel
 import com.example.domain.usecases.CryptoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
+import org.json.JSONObject
 
 import javax.inject.Inject
 
@@ -23,4 +24,14 @@ class CryptoListViewModel @Inject constructor(
         started = SharingStarted.Eagerly,
         initialValue = emptyList()
     )
+
+//    val captchaParams: StateFlow<JSONObject?> = flow {
+//        cryptoUseCase.getCaptchaParams().collect {
+//            params -> emit(params)
+//        }
+//    }.stateIn(
+//        scope = viewModelScope,
+//        started = SharingStarted.Eagerly,
+//        initialValue = JSONObject()
+//    )
 }
