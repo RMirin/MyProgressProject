@@ -8,6 +8,5 @@ import javax.inject.Inject
 class CryptoSource @Inject constructor(
     private val dao: CryptoDao
 ) {
-
     fun getCrypto(): Flow<List<Crypto>> = dao.getAllCrypto()
 }
