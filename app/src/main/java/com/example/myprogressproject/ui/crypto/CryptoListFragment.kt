@@ -110,12 +110,10 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
             webviewTimeout = 10000
             listener = object : BaseGT3Listener() {
 
-                /**
-                 * api1 custom call
-                 */
-                override fun onButtonClick() {
-                    lifecycleScope.launch(Dispatchers.Main) {
-                        cryptoListViewModel.getCaptcha()
+                override fun onReceiveCaptchaCode(captcha: Int) {
+                    //captcha: 0 - failed, 1 - passed
+                    if (captcha == 1) {
+                        gt3GeetestUtils.dismissGeetestDialog()
                     }
                 }
             }
