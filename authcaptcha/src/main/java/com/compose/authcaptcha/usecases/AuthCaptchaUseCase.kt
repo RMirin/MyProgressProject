@@ -1,7 +1,7 @@
-package com.example.domain.usecases
+package com.compose.authcaptcha.usecases
 
-import com.example.core.base.State
-import com.example.domain.repositories.AuthCaptchaRepository
+import com.compose.authcaptcha.base.State
+import com.compose.authcaptcha.repository.AuthCaptchaRepository
 import kotlinx.coroutines.flow.Flow
 import org.json.JSONObject
 import javax.inject.Inject
@@ -17,6 +17,6 @@ class AuthCaptchaUseCaseImpl @Inject constructor(
 ) : AuthCaptchaUseCase {
 
     override suspend fun getCaptchaParams(): Flow<State<JSONObject?>> {
-        return authCaptchaRepository.getCaptchaParams()
+        return authCaptchaRepository.getCaptchaParams(System.currentTimeMillis())
     }
 }

@@ -1,4 +1,4 @@
-package com.example.core.exception
+package com.compose.authcaptcha.exception
 
 import java.io.IOException
 

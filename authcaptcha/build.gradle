@@ -14,6 +14,8 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField 'String', 'GEE_TEST_API_URL', '\"https://www.geetest.com/demo/gt/\"'
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -35,25 +37,24 @@ android {
 
 dependencies {
 
-    implementation(project(":core"))
-    implementation(project(":domain"))
-
-    implementation(Dependencies.kotlin)
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.21"
 
     //Kotlin Coroutines
-    implementation(Dependencies.kotlinCoroutinesCore)
-    implementation(Dependencies.kotlinCoroutinesAndroid)
-    implementation(Dependencies.lifecycleRuntimeKtx)
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha03"
 
     //DI
-    implementation(Dependencies.daggerHilt)
-    kapt(Dependencies.daggerHiltCompiler)
+    implementation "com.google.dagger:hilt-android:2.34.1-beta"
+    kapt "com.google.dagger:hilt-compiler:2.34.1-beta"
 
     //Networking
-    implementation(Dependencies.retrofit2Retrofit)
-    implementation(Dependencies.retrofit2ConverterJson)
-    implementation(Dependencies.retrofit2AdapterRxjava2)
-    implementation(Dependencies.okhttpLoggingInterceptor)
-
+    implementation "com.squareup.retrofit2:retrofit:2.7.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.7.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.7.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
+
+    //Captcha
+    implementation 'com.geetest.sensebot:sensebot:4.3.5.1'
 }

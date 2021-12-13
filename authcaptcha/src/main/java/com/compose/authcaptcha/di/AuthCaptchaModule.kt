@@ -2,15 +2,15 @@ package com.compose.authcaptcha.di
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.compose.authcaptcha.di.NetRequestUtils.PersistenceCookieJar
-import com.example.core.interceptor.NetworkConnectionInterceptor
+import com.compose.authcaptcha.BuildConfig
+import com.compose.authcaptcha.interceptor.NetworkConnectionInterceptor
+import com.compose.authcaptcha.repository.AuthCaptchaRepository
 import com.compose.authcaptcha.repository.AuthCaptchaRepositoryImpl
 import com.compose.authcaptcha.service.ApiService
-import com.example.core.service.NetworkService
-import com.example.core.service.NetworkServiceImpl
-import com.example.domain.repositories.AuthCaptchaRepository
-import com.example.domain.usecases.AuthCaptchaUseCase
-import com.example.domain.usecases.AuthCaptchaUseCaseImpl
+import com.compose.authcaptcha.service.NetworkService
+import com.compose.authcaptcha.service.NetworkServiceImpl
+import com.compose.authcaptcha.usecases.AuthCaptchaUseCase
+import com.compose.authcaptcha.usecases.AuthCaptchaUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,8 +21,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.security.KeyStore
-import java.security.SecureRandom
-import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 import javax.net.ssl.*
@@ -54,20 +52,10 @@ object AuthCaptchaModule {
                 val trustManagerFactory: TrustManagerFactory =
                     TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
                 trustManagerFactory.init(null as KeyStore?)
-                val trustManagers: Array<TrustManager> = trustManagerFactory.getTrustManagers()
+                val trustManagers: Array<TrustManager> = trustManagerFactory.trustManagers
                 check(!(trustManagers.size != 1 || trustManagers[0] !is X509TrustManager)) {
-                    "Unexpected default trust managers:" + Arrays.toString(
-                        trustManagers
-                    )
+                    "Unexpected default trust managers:" + trustManagers.contentToString()
                 }
-                val trustManager: X509TrustManager = trustManagers[0] as X509TrustManager
-                val sslContext: SSLContext = SSLContext.getInstance("SSL")
-                sslContext.init(null, arrayOf(NetRequestUtils.MyX509TrustManager()), SecureRandom())
-                val sslSocketFactory: SSLSocketFactory = sslContext.getSocketFactory()
-                it.cookieJar(PersistenceCookieJar())
-                it.sslSocketFactory(sslSocketFactory, trustManager)
-                it.followRedirects(true)
-                it.followSslRedirects(true)
             }
             .build()
 
@@ -75,7 +63,7 @@ object AuthCaptchaModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://www.geetest.com/demo/gt/")
+            .baseUrl(BuildConfig.GEE_TEST_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -84,4 +72,14 @@ object AuthCaptchaModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService =
         retrofit.create(ApiService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideAuthCaptchaRepository(apiService: ApiService): AuthCaptchaRepository =
+        AuthCaptchaRepositoryImpl(apiService)
+
+    @Provides
+    @Singleton
+    fun provideAuthCaptchaUseCase(authCaptchaRepository: AuthCaptchaRepository): AuthCaptchaUseCase =
+        AuthCaptchaUseCaseImpl(authCaptchaRepository)
 }

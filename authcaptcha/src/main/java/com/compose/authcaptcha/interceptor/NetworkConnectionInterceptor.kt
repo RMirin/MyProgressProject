@@ -1,7 +1,7 @@
-package com.example.core.interceptor
+package com.compose.authcaptcha.interceptor
 
-import com.example.core.exception.NoInternetException
-import com.example.core.service.NetworkService
+import com.compose.authcaptcha.exception.NoInternetException
+import com.compose.authcaptcha.service.NetworkService
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException

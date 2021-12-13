@@ -1,15 +1,14 @@
 package com.example.myprogressproject.ui.crypto
 
 import android.app.Application
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.compose.authcaptcha.base.State
+import com.compose.authcaptcha.extension.doOnError
+import com.compose.authcaptcha.extension.doOnLoading
+import com.compose.authcaptcha.extension.doOnSuccess
 import com.example.core.base.BaseViewModel
-import com.example.core.base.State
-import com.example.core.extension.doOnError
-import com.example.core.extension.doOnLoading
-import com.example.core.extension.doOnSuccess
 import com.example.domain.entity.CryptoDataModel
-import com.example.domain.usecases.AuthCaptchaUseCase
+import com.compose.authcaptcha.usecases.AuthCaptchaUseCase
 import com.example.domain.usecases.CryptoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -47,7 +46,6 @@ class CryptoListViewModel @Inject constructor(
         }
         .doOnError { error ->
             _uiState.value = State.Error(error)
-//            showBasicError(error)
         }
         .launchIn(viewModelScope)
 }

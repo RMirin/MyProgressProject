@@ -1,10 +1,9 @@
-package com.example.core.service
+package com.compose.authcaptcha.service
 
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import javax.inject.Inject
-import javax.net.ssl.SSLContext
 
 interface NetworkService {
     val isNetworkAvailable: Boolean
