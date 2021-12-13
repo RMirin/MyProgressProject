@@ -113,6 +113,7 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
                 override fun onReceiveCaptchaCode(captcha: Int) {
                     //captcha: 0 - failed, 1 - passed
                     if (captcha == 1) {
+                        Toast.makeText((activity as MainActivity), "captcha passed", Toast.LENGTH_SHORT).show()
                         gt3GeetestUtils.dismissGeetestDialog()
                     }
                 }
@@ -162,8 +163,6 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
             lifecycleScope.launch(Dispatchers.Main) {
                 cryptoListViewModel.getCaptcha()
             }
-
-//            RequestAPI1(activity as MainActivity, gt3ConfigBean, gt3GeetestUtils, riskTypeEnum).execute()
         } else {
             Toast.makeText((activity as MainActivity), cryptoAction.name, Toast.LENGTH_SHORT).show()
         }
