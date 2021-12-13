@@ -47,4 +47,7 @@ object Versions {
 
     //Ui
     const val coordinatorLayoutVersion = "1.1.0"
+
+    //Networking
+    const val okhttpLoggingInterceptorVersion = "4.2.1"
 }
