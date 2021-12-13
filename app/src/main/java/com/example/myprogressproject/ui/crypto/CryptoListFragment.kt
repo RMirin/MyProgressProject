@@ -29,7 +29,10 @@ import androidx.lifecycle.lifecycleScope
 import com.compose.authcaptcha.remote.HttpUtils
 import com.compose.authcaptcha.utils.AddressUtils
 import com.compose.authcaptcha.utils.RiskTypeEnum
-import com.compose.authcaptcha.remote.NetRequestUtils
+import com.compose.authcaptcha.di.NetRequestUtils
+import com.example.core.base.State
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.lang.Exception
 
 @AndroidEntryPoint
@@ -68,7 +71,7 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
-        observeData()
+        observeData(gt3ConfigBean)
         initView()
         initCaptcha()
     }
@@ -180,7 +183,10 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
              */
             override fun onButtonClick() {
                 Log.e("TAG", "onButtonClick: ")
-                    RequestAPI1(activity as MainActivity, gt3ConfigBean, gt3GeetestUtils, riskTypeEnum).execute()
+//                lifecycleScope.launch(Dispatchers.Main) {
+//                    cryptoListViewModel.getCaptcha()
+//                }
+//                    RequestAPI1(activity as MainActivity, gt3ConfigBean, gt3GeetestUtils, riskTypeEnum).execute()
             }
         }
         gt3GeetestUtils.init(gt3ConfigBean)
@@ -231,10 +237,27 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
         visibilityView.visibility = visible
     }
 
-    private fun observeData() {
+    private fun observeData(configBean: GT3ConfigBean) {
         with(cryptoListViewModel) {
             cryptoList.launchWhenStarted(lifecycleScope) { cryptoDataList ->
                 cryptoListAdapter.setData(cryptoDataList)
+            }
+
+            uiState.launchWhenStarted(lifecycleScope) { state ->
+                when(state) {
+                    is State.Loading -> {
+//                            layoutShimmer.shimmerLayout.startShimmer()
+                    }
+                    is State.Success -> {
+                        Log.e("TAG", "RequestAPI1-->onPostExecute: ${state.data}")
+                        configBean.setApi1Json(state.data)
+                        gt3GeetestUtils.getGeetest()
+                    }
+                    is State.Error -> {
+                        Log.e("TAG", "observeData: error" )
+//                            refreshList.isRefreshing = false
+                    }
+                }
             }
         }
     }
@@ -244,6 +267,11 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
     override fun onCryptoActionClicked(cryptoAction: CryptoAction) {
         if (cryptoAction == CryptoAction.VERIFICATION) {
             gt3GeetestUtils.startCustomFlow()
+            lifecycleScope.launch(Dispatchers.Main) {
+                cryptoListViewModel.getCaptcha()
+            }
+
+//            RequestAPI1(activity as MainActivity, gt3ConfigBean, gt3GeetestUtils, riskTypeEnum).execute()
         } else {
             Toast.makeText((activity as MainActivity), cryptoAction.name, Toast.LENGTH_SHORT).show()
         }

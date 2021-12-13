@@ -16,10 +16,6 @@ public class AddressUtils {
         return joinUrl(context, typeEnum, true);
     }
 
-    public static String getValidate(Context context, RiskTypeEnum typeEnum) {
-        return joinUrl(context, typeEnum, false);
-    }
-
     private static String joinUrl(Context context, RiskTypeEnum typeEnum, boolean isRegister) {
         String base = getPreferences(context).getString("settings_address_base", "https://www.geetest.com/demo/gt/");
         String type;
@@ -31,21 +27,6 @@ public class AddressUtils {
         }
         return base + (isRegister ? "register-" : "validate-") + type;
 
-    }
-
-    private static String subUrl(String address, RiskTypeEnum typeEnum, boolean isRegister) {
-        if (typeEnum == RiskTypeEnum.OTHER) {
-            return address;
-        }
-        try {
-            URL url = new URL(address);
-            String path = url.getPath().substring(0, url.getPath().lastIndexOf("/"));
-            String register_base = new URL(url.getProtocol(), url.getHost(), path).toString();
-            return register_base + (isRegister ? "/register-" : "/validate-") + typeEnum.type;
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return address;
     }
 
     private static SharedPreferences getPreferences(Context context) {

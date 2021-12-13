@@ -7,7 +7,7 @@ object Versions {
     const val kotlinVersion = "1.5.21"
 
     //Room
-    const val roomVersion = "2.4.0-alpha03"
+    const val roomVersion = "2.3.0"
 
     //Coroutines
     const val kotlinCoroutinesVersion = "1.3.9"
@@ -47,5 +47,5 @@ object Versions {
 
     //Networking
     const val retrofitVersion = "2.7.0"
-    const val okhttpLoggingInterceptorVersion = "4.2.1"
+    const val okhttpLoggingInterceptorVersion = "5.0.0-alpha.2"
 }

@@ -1,8 +1,15 @@
 package com.example.myprogressproject.ui.crypto
 
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.core.base.BaseViewModel
+import com.example.core.base.State
+import com.example.core.extension.doOnError
+import com.example.core.extension.doOnLoading
+import com.example.core.extension.doOnSuccess
 import com.example.domain.entity.CryptoDataModel
+import com.example.domain.usecases.AuthCaptchaUseCase
 import com.example.domain.usecases.CryptoUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -12,8 +19,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CryptoListViewModel @Inject constructor(
-    private val cryptoUseCase: CryptoUseCase
-): ViewModel() {
+    private val cryptoUseCase: CryptoUseCase,
+    private val authCaptchaUseCase: AuthCaptchaUseCase,
+    app: Application
+): BaseViewModel(app) {
+
+    private val _uiState = MutableStateFlow<State<JSONObject?>>(State.Loading)
+    val uiState: StateFlow<State<JSONObject?>>
+        get() = _uiState
 
     val cryptoList: StateFlow<List<CryptoDataModel>> = flow {
         cryptoUseCase.getData().collect { cryptoDataModelList ->
@@ -25,13 +38,16 @@ class CryptoListViewModel @Inject constructor(
         initialValue = emptyList()
     )
 
-//    val captchaParams: StateFlow<JSONObject?> = flow {
-//        cryptoUseCase.getCaptchaParams().collect {
-//            params -> emit(params)
-//        }
-//    }.stateIn(
-//        scope = viewModelScope,
-//        started = SharingStarted.Eagerly,
-//        initialValue = JSONObject()
-//    )
+    suspend fun getCaptcha() = authCaptchaUseCase.getCaptchaParams()
+        .doOnLoading {
+            _uiState.value = State.Loading
+        }
+        .doOnSuccess { jsonObject ->
+            _uiState.value = State.Success(jsonObject)
+        }
+        .doOnError { error ->
+            _uiState.value = State.Error(error)
+//            showBasicError(error)
+        }
+        .launchIn(viewModelScope)
 }

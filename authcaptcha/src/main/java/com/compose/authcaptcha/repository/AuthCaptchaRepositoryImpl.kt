@@ -4,6 +4,7 @@ import com.compose.authcaptcha.service.ApiService
 import com.example.core.base.BaseRepository
 import com.example.core.base.State
 import com.example.domain.repositories.AuthCaptchaRepository
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import org.json.JSONObject
 import javax.inject.Inject
@@ -15,6 +16,6 @@ class AuthCaptchaRepositoryImpl @Inject constructor(
 ) : AuthCaptchaRepository, BaseRepository() {
 
     override suspend fun getCaptchaParams(): Flow<State<JSONObject?>> = apiCall {
-        JSONObject(apiService.getCaptcha().toString())
+        JSONObject(apiService.getCaptcha(System.currentTimeMillis().toInt()).string())
     }
 }

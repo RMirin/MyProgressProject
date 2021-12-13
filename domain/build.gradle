@@ -33,9 +33,6 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
-    buildFeatures {
-        dataBinding = true
-    }
     kapt {
         correctErrorTypes = true
         generateStubs = true
@@ -68,4 +65,12 @@ dependencies {
     implementation(Dependencies.kotlinCoroutinesCore)
     implementation(Dependencies.kotlinCoroutinesAndroid)
     implementation(Dependencies.lifecycleRuntimeKtx)
+
+    //Networking
+    implementation(Dependencies.retrofit2Retrofit)
+    implementation(Dependencies.retrofit2ConverterJson)
+    implementation(Dependencies.retrofit2AdapterRxjava2)
+    implementation(Dependencies.okhttpLoggingInterceptor)
+
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
 }

@@ -2,6 +2,7 @@ package com.compose.authcaptcha.di
 
 import android.content.Context
 import android.net.ConnectivityManager
+import com.compose.authcaptcha.di.NetRequestUtils.PersistenceCookieJar
 import com.example.core.interceptor.NetworkConnectionInterceptor
 import com.compose.authcaptcha.repository.AuthCaptchaRepositoryImpl
 import com.compose.authcaptcha.service.ApiService
@@ -19,22 +20,16 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.security.KeyStore
+import java.security.SecureRandom
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+import javax.net.ssl.*
 
 @Module
 @InstallIn(SingletonComponent::class)
-class AuthCaptchaModule {
-
-    @Provides
-    @Singleton
-    fun provideAuthCaptchaRepository(apiService: ApiService): AuthCaptchaRepository =
-        AuthCaptchaRepositoryImpl(apiService)
-
-    @Provides
-    @Singleton
-    fun provideAuthCaptchaUseCase(authCaptchaRepository: AuthCaptchaRepository): AuthCaptchaUseCase =
-        AuthCaptchaUseCaseImpl(authCaptchaRepository)
+object AuthCaptchaModule {
 
     @Provides
     @Singleton
@@ -55,13 +50,32 @@ class AuthCaptchaModule {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             )
             .addInterceptor(NetworkConnectionInterceptor(networkService))
+            .also {
+                val trustManagerFactory: TrustManagerFactory =
+                    TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
+                trustManagerFactory.init(null as KeyStore?)
+                val trustManagers: Array<TrustManager> = trustManagerFactory.getTrustManagers()
+                check(!(trustManagers.size != 1 || trustManagers[0] !is X509TrustManager)) {
+                    "Unexpected default trust managers:" + Arrays.toString(
+                        trustManagers
+                    )
+                }
+                val trustManager: X509TrustManager = trustManagers[0] as X509TrustManager
+                val sslContext: SSLContext = SSLContext.getInstance("SSL")
+                sslContext.init(null, arrayOf(NetRequestUtils.MyX509TrustManager()), SecureRandom())
+                val sslSocketFactory: SSLSocketFactory = sslContext.getSocketFactory()
+                it.cookieJar(PersistenceCookieJar())
+                it.sslSocketFactory(sslSocketFactory, trustManager)
+                it.followRedirects(true)
+                it.followSslRedirects(true)
+            }
             .build()
 
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://api.geetest.com/")
+            .baseUrl("https://www.geetest.com/demo/gt/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -70,18 +84,4 @@ class AuthCaptchaModule {
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService =
         retrofit.create(ApiService::class.java)
-
-//    @Provides
-//    @Singleton
-//    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
-//        Retrofit.Builder()
-//            .baseUrl("https://api.geetest.com/")
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .client(okHttpClient)
-//            .build()
-//
-//    @Provides
-//    @Singleton
-//    fun provideApiService(retrofit: Retrofit): ApiService =
-//        retrofit.create(ApiService::class.java)
 }

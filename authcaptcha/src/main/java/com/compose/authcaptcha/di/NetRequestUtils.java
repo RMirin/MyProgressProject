@@ -1,4 +1,4 @@
-package com.compose.authcaptcha.remote;
+package com.compose.authcaptcha.di;
 
 import android.util.Log;
 
@@ -58,44 +58,6 @@ public final class NetRequestUtils {
                 .build();
     }
 
-
-    public static String requestPost(String url, String postParam) {
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-        urlBuilder.addQueryParameter("t", System.currentTimeMillis() + "");
-        MediaType mediaType = MediaType.parse("application/json");
-        RequestBody requestBody = RequestBody.create(mediaType, postParam);
-        Request.Builder builder = new Request
-                .Builder()
-                .post(requestBody)
-                .url(urlBuilder.build());
-        try {
-            Response response = okHttpClient.newCall(builder.build()).execute();
-            return response.body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public static String requestPostByForm(String url, String param) {
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(url).newBuilder();
-        urlBuilder.addQueryParameter("t", System.currentTimeMillis() + "");
-        MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-        RequestBody requestBody = RequestBody.create(mediaType, jsonToForm(param));
-        Request request = new Request
-                .Builder()
-                .post(requestBody)
-                .url(urlBuilder.build())
-                .build();
-        try {
-            Response response = okHttpClient.newCall(request).execute();
-            return response.body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public static String requestGet(String urlString) {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(urlString).newBuilder();
         urlBuilder.addQueryParameter("t", System.currentTimeMillis() + "");
@@ -110,24 +72,7 @@ public final class NetRequestUtils {
         return null;
     }
 
-    private static final String GEETEST_VALIDATE = "geetest_validate";
-    private static final String GEETEST_SECCODE = "geetest_seccode";
-    private static final String GEETEST_CHALLENGE = "geetest_challenge";
-
-    private static String jsonToForm(String param) {
-        try {
-            JSONObject jsonObject = new JSONObject(param);
-            String seccode = jsonObject.getString(GEETEST_SECCODE);
-            String validate = jsonObject.getString(GEETEST_VALIDATE);
-            String challenge = jsonObject.getString(GEETEST_CHALLENGE);
-            return GEETEST_VALIDATE + "=" + validate + "&" + GEETEST_SECCODE + "=" + seccode + "&" + GEETEST_CHALLENGE + "=" + challenge;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private static class MyX509TrustManager implements X509TrustManager {
+    public static class MyX509TrustManager implements X509TrustManager {
 
         @Override
         public void checkServerTrusted(X509Certificate[] chain, String authType) {
@@ -153,7 +98,7 @@ public final class NetRequestUtils {
         }
     }
 
-    private static class PersistenceCookieJar implements CookieJar {
+    public static class PersistenceCookieJar implements CookieJar {
         List<Cookie> cache = new ArrayList<>();
 
         @Override
