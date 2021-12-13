@@ -1,4 +1,4 @@
-package com.example.domain.mapper
+package com.example.data.mapper
 
 import com.example.data.local.entity.Crypto
 import com.example.domain.entity.CryptoDataModel

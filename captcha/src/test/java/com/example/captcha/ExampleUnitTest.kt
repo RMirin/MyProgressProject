@@ -1,4 +1,4 @@
-package com.evgfad.captcha
+package com.example.captcha
 
 import org.junit.Test
 

@@ -16,7 +16,7 @@ object Versions {
     const val kotlinCoroutinesVersion = "1.3.9"
 
     //Dagger hilt
-    const val daggerHiltVersion = "2.34.1-beta"
+    const val daggerHiltVersion = "2.40.5"
 
     //Rx Java
     const val rxJava2RxAndroidVersion = "2.1.1"

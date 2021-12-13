@@ -1,6 +1,6 @@
-package com.evgfad.captcha.di
+package com.example.captcha.di
 
-import com.evgfad.captcha.network.GeeTestApi
+import com.example.captcha.data.api.GeeTestApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,11 +10,12 @@ import retrofit2.Retrofit
 import javax.inject.Singleton
 
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+object NetworkModule {
 
     @Provides
     @Singleton
@@ -22,16 +23,12 @@ class NetworkModule {
         .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         .build()
 
-
-    @Provides
     @Singleton
-    fun provideRetrofit(client: OkHttpClient): Retrofit = Retrofit.Builder()
+    @Provides
+    fun provideGeeTestApi(client: OkHttpClient): GeeTestApi = Retrofit.Builder()
         .baseUrl("https://www.geetest.com/demo/gt/")
+        .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()
-
-    @Provides
-    @Singleton
-    fun provideWallApiService(retrofit: Retrofit): GeeTestApi =
-        retrofit.create(GeeTestApi::class.java)
+        .create(GeeTestApi::class.java)
 }

@@ -1,8 +1,8 @@
 package com.example.domain.repositories
 
-import com.example.data.local.entity.Crypto
+import com.example.domain.entity.CryptoDataModel
 import kotlinx.coroutines.flow.Flow
 
 interface CryptoRepository {
-    fun getCrypto(): Flow<List<Crypto>>
+    fun getCrypto(): Flow<List<CryptoDataModel>>
 }

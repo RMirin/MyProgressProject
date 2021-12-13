@@ -30,11 +30,13 @@
                             android:layout_marginTop="56dp"
                             android:orientation="vertical">
 
-                        <com.geetest.sdk.views.GT3GeetestButton
+                        <Button
                                 android:id="@+id/btn_geetest"
-                                android:layout_width="290dp"
-                                android:layout_height="44dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:gravity="center"
+                                android:text="Captcha"
+                                android:layout_gravity="center"
                                 android:orientation="horizontal" />
 
                         <TextView
