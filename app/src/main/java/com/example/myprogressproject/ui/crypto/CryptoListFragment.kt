@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.example.core.base.BaseFragment
 import com.example.core.extension.launchWhenStarted
 import com.example.core.extension.MemberItemDecoration
@@ -18,7 +16,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.example.myprogressproject.ui.crypto.filter.FilterBottomSheetFragment
 import com.example.myprogressproject.ui.crypto.filter.FilterBottomSheetListener
 import com.example.myprogressproject.ui.main.MainActivity
+import com.geetest.sdk.GT3ConfigBean
+import com.geetest.sdk.GT3GeetestUtils
 import java.lang.RuntimeException
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.compose.authcaptcha.base.BaseGT3Listener
+import com.compose.authcaptcha.base.State
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActionsListener, FilterBottomSheetListener, CryptoListListener {
@@ -29,6 +35,10 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
 
     private val cryptoListAdapter: CryptoListAdapter by lazy(LazyThreadSafetyMode.NONE) { CryptoListAdapter(this) }
     private val cryptoActionsAdapter: CryptoActionsAdapter by lazy(LazyThreadSafetyMode.NONE) { CryptoActionsAdapter(this) }
+
+    private val gt3GeetestUtils: GT3GeetestUtils by lazy(LazyThreadSafetyMode.NONE) { GT3GeetestUtils(activity as MainActivity) }
+
+    val gt3ConfigBean = GT3ConfigBean()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -50,8 +60,9 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
-        observeData()
+        observeData(gt3ConfigBean)
         initView()
+        initCaptcha()
     }
 
     private fun initView() {
@@ -90,6 +101,27 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
         }
     }
 
+    private fun initCaptcha() {
+        with(gt3ConfigBean) {
+            pattern = 1
+            isCanceledOnTouchOutside = false
+            lang = null
+            timeout = 10000
+            webviewTimeout = 10000
+            listener = object : BaseGT3Listener() {
+
+                override fun onReceiveCaptchaCode(captcha: Int) {
+                    //captcha: 0 - failed, 1 - passed
+                    if (captcha == 1) {
+                        Toast.makeText((activity as MainActivity), "captcha passed", Toast.LENGTH_SHORT).show()
+                        gt3GeetestUtils.dismissGeetestDialog()
+                    }
+                }
+            }
+        }
+        gt3GeetestUtils.init(gt3ConfigBean)
+    }
+
     private fun initRecycler() {
         with(binding) {
             profListRecycler.adapter = cryptoListAdapter
@@ -104,10 +136,21 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
         visibilityView.visibility = visible
     }
 
-    private fun observeData() {
+    private fun observeData(configBean: GT3ConfigBean) {
         with(cryptoListViewModel) {
             cryptoList.launchWhenStarted(lifecycleScope) { cryptoDataList ->
                 cryptoListAdapter.setData(cryptoDataList)
+            }
+
+            uiState.launchWhenStarted(lifecycleScope) { state ->
+                when(state) {
+                    is State.Loading -> {}
+                    is State.Success -> {
+                        configBean.api1Json = state.data
+                        gt3GeetestUtils.getGeetest()
+                    }
+                    is State.Error -> {}
+                }
             }
         }
     }
@@ -115,7 +158,14 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
     override fun initViewBinding(): FragmentCryptoListBinding = FragmentCryptoListBinding.inflate(layoutInflater)
 
     override fun onCryptoActionClicked(cryptoAction: CryptoAction) {
-        Toast.makeText((activity as MainActivity), cryptoAction.name, Toast.LENGTH_SHORT).show()
+        if (cryptoAction == CryptoAction.VERIFICATION) {
+            gt3GeetestUtils.startCustomFlow()
+            lifecycleScope.launch(Dispatchers.Main) {
+                cryptoListViewModel.getCaptcha()
+            }
+        } else {
+            Toast.makeText((activity as MainActivity), cryptoAction.name, Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onFilterClick(filer: Int) {

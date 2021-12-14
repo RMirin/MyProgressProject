@@ -47,4 +47,10 @@ object Dependencies {
 
     //Ui
     const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:${Versions.coordinatorLayoutVersion}"
+
+    //Networking
+    const val retrofit2Retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}"
+    const val retrofit2ConverterJson = "com.squareup.retrofit2:converter-gson:${Versions.retrofitVersion}"
+    const val retrofit2AdapterRxjava2 = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofitVersion}"
+    const val okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttpLoggingInterceptorVersion}"
 }

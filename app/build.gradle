@@ -37,12 +37,12 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
-        dataBinding = true
+        viewBinding true
+        dataBinding true
     }
     kapt {
         correctErrorTypes true
-        generateStubs = true
+        generateStubs true
     }
     packagingOptions {
         resources {
@@ -56,6 +56,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":core"))
+    implementation(project(":authcaptcha"))
 
     //Base
     implementation(Dependencies.androidxCoreCoreKtx)
@@ -85,5 +86,15 @@ dependencies {
     //Ui
     implementation(Dependencies.coordinatorLayout)
 
+    //Networking
+    implementation(Dependencies.retrofit2Retrofit)
+    implementation(Dependencies.retrofit2ConverterJson)
+    implementation(Dependencies.retrofit2AdapterRxjava2)
+    implementation(Dependencies.okhttpLoggingInterceptor)
+
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
+
     implementation 'com.tradingview:lightweightcharts:3.6.1'
+
+    implementation 'com.geetest.sensebot:sensebot:4.3.5.1'
 }

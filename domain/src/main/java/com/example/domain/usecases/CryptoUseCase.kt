@@ -3,8 +3,6 @@ package com.example.domain.usecases
 import com.example.domain.entity.CryptoDataModel
 import com.example.domain.repositories.CryptoRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import com.example.domain.mapper.cryptoDataListToCryptoModelList
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,9 +16,6 @@ class CryptoUseCaseImpl @Inject constructor(
 ) : CryptoUseCase {
 
     override suspend fun getData(): Flow<List<CryptoDataModel>> {
-        return cryptoRepository.getCrypto().map {
-                list ->
-            cryptoDataListToCryptoModelList(list)
-        }
+        return cryptoRepository.getCrypto()
     }
 }

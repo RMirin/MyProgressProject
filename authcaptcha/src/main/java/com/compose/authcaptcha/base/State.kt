@@ -1,4 +1,4 @@
-package com.example.domain.common
+package com.compose.authcaptcha.base
 
 sealed class State<out T> {
 
