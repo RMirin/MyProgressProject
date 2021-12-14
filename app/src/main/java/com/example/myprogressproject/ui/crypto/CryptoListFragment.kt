@@ -105,7 +105,8 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
         with(gt3ConfigBean) {
             pattern = 1
             isCanceledOnTouchOutside = false
-            lang = null
+            //Change dialog language
+            lang = "EN"
             timeout = 10000
             webviewTimeout = 10000
             listener = object : BaseGT3Listener() {

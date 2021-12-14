@@ -61,17 +61,13 @@ object AuthCaptchaModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
+    fun provideRetrofit(okHttpClient: OkHttpClient): ApiService =
         Retrofit.Builder()
             .baseUrl(BuildConfig.GEE_TEST_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
-
-    @Provides
-    @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiService =
-        retrofit.create(ApiService::class.java)
+            .create(ApiService::class.java)
 
     @Provides
     @Singleton

@@ -1,0 +1,46 @@
+Index: buildSrc/build/pluginUnderTestMetadata/plugin-under-test-metadata.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>implementation-classpath=/Users/evgenijfadin/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/java/main\\:/Users/evgenijfadin/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/groovy/main\\:/Users/evgenijfadin/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/kotlin/main\\:/Users/evgenijfadin/AndroidStudioProjects/MyProgressProject/buildSrc/build/resources/main\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/buildSrc/build/pluginUnderTestMetadata/plugin-under-test-metadata.properties b/buildSrc/build/pluginUnderTestMetadata/plugin-under-test-metadata.properties
+--- a/buildSrc/build/pluginUnderTestMetadata/plugin-under-test-metadata.properties	(revision b842a09ca3a505cf4e3c399d0d2012a1aab51e43)
++++ b/buildSrc/build/pluginUnderTestMetadata/plugin-under-test-metadata.properties	(date 1639485308656)
+@@ -1,1 +1,1 @@
+-implementation-classpath=/Users/evgenijfadin/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/java/main\:/Users/evgenijfadin/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/groovy/main\:/Users/evgenijfadin/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/kotlin/main\:/Users/evgenijfadin/AndroidStudioProjects/MyProgressProject/buildSrc/build/resources/main
++implementation-classpath=/home/adnow3/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/java/main\:/home/adnow3/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/groovy/main\:/home/adnow3/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/kotlin/main\:/home/adnow3/AndroidStudioProjects/MyProgressProject/buildSrc/build/resources/main
+Index: buildSrc/build/kotlin/buildSrcjar-classes.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/Users/evgenijfadin/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/kotlin/main/ClassPaths.class:/Users/evgenijfadin/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/kotlin/main/Dependencies.class:/Users/evgenijfadin/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/kotlin/main/Versions.class
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/buildSrc/build/kotlin/buildSrcjar-classes.txt b/buildSrc/build/kotlin/buildSrcjar-classes.txt
+--- a/buildSrc/build/kotlin/buildSrcjar-classes.txt	(revision b842a09ca3a505cf4e3c399d0d2012a1aab51e43)
++++ b/buildSrc/build/kotlin/buildSrcjar-classes.txt	(date 1639485308480)
+@@ -1,1 +1,1 @@
+-/Users/evgenijfadin/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/kotlin/main/ClassPaths.class:/Users/evgenijfadin/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/kotlin/main/Dependencies.class:/Users/evgenijfadin/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/kotlin/main/Versions.class
+\ No newline at end of file
++/home/adnow3/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/kotlin/main/ClassPaths.class:/home/adnow3/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/kotlin/main/Dependencies.class:/home/adnow3/AndroidStudioProjects/MyProgressProject/buildSrc/build/classes/kotlin/main/Versions.class
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\n  <component name=\"GradleSettings\">\n    <option name=\"linkedExternalProjectsSettings\">\n      <GradleProjectSettings>\n        <option name=\"testRunner\" value=\"GRADLE\" />\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\n        <option name=\"gradleJvm\" value=\"11\" />\n        <option name=\"modules\">\n          <set>\n            <option value=\"$PROJECT_DIR$\" />\n            <option value=\"$PROJECT_DIR$/app\" />\n            <option value=\"$PROJECT_DIR$/authcaptcha\" />\n            <option value=\"$PROJECT_DIR$/buildSrc\" />\n            <option value=\"$PROJECT_DIR$/captcha\" />\n            <option value=\"$PROJECT_DIR$/core\" />\n            <option value=\"$PROJECT_DIR$/data\" />\n            <option value=\"$PROJECT_DIR$/domain\" />\n          </set>\n        </option>\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\n      </GradleProjectSettings>\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision b842a09ca3a505cf4e3c399d0d2012a1aab51e43)
++++ b/.idea/gradle.xml	(date 1639485377062)
+@@ -12,7 +12,6 @@
+           <set>
+             <option value="$PROJECT_DIR$" />
+             <option value="$PROJECT_DIR$/app" />
+-            <option value="$PROJECT_DIR$/authcaptcha" />
+             <option value="$PROJECT_DIR$/buildSrc" />
+             <option value="$PROJECT_DIR$/captcha" />
+             <option value="$PROJECT_DIR$/core" />
