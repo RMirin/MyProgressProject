@@ -48,4 +48,9 @@ object Versions {
     //Networking
     const val retrofitVersion = "2.7.0"
     const val okhttpLoggingInterceptorVersion = "5.0.0-alpha.2"
+
+    //Websocket
+    const val orgJavaWebsocketVersion = "1.5.1"
+    const val scarletVersion = "0.1.10"
+    const val moshiKotlinVersion = "1.11.0"
 }

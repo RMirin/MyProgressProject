@@ -1,0 +1,65 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion 31
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.21"
+
+    //Kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha03"
+
+    //DI
+    implementation "com.google.dagger:hilt-android:2.34.1-beta"
+    kapt "com.google.dagger:hilt-compiler:2.34.1-beta"
+
+    //Reactive
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+    implementation "io.reactivex.rxjava2:rxkotlin:2.4.0"
+
+    //Websocket
+    implementation(Dependencies.scarletScarlet)
+    implementation(Dependencies.scarletWebsocketOkhttp)
+    implementation "com.tinder.scarlet:lifecycle-android:0.1.10"
+    implementation(Dependencies.scarletStreamAdapterRxJava)
+    implementation(Dependencies.scarletMessageAdapterMoshi)
+    implementation(Dependencies.moshiKotlin)
+
+    //Networking
+    implementation(Dependencies.retrofit2Retrofit)
+    implementation(Dependencies.retrofit2ConverterJson)
+    implementation(Dependencies.retrofit2AdapterRxjava2)
+    implementation(Dependencies.okhttpLoggingInterceptor)
+}

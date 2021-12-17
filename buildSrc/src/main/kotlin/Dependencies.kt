@@ -53,4 +53,13 @@ object Dependencies {
     const val retrofit2ConverterJson = "com.squareup.retrofit2:converter-gson:${Versions.retrofitVersion}"
     const val retrofit2AdapterRxjava2 = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofitVersion}"
     const val okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttpLoggingInterceptorVersion}"
+
+    //Websocket
+    const val orgJavaWebsocket = "org.java-websocket: Java-WebSocket:${Versions.orgJavaWebsocketVersion}"
+    const val scarletScarlet = "com.tinder.scarlet:scarlet:${Versions.scarletVersion}"
+    const val scarletWebsocketOkhttp = "com.tinder.scarlet:websocket-okhttp:${Versions.scarletVersion}"
+    const val scarletLifecycleAndroid = "com.tinder.scarlet:lifecycle-android:${Versions.scarletVersion}"
+    const val scarletStreamAdapterRxJava = "com.tinder.scarlet:stream-adapter-rxjava2:${Versions.scarletVersion}"
+    const val scarletMessageAdapterMoshi = "com.tinder.scarlet:message-adapter-moshi:${Versions.scarletVersion}"
+    const val moshiKotlin = "com.squareup.moshi:moshi-kotlin:${Versions.moshiKotlinVersion}"
 }
