@@ -1,0 +1,29 @@
+com/example/captcha/BuildConfig.java
+ com.example.captcha.BuildConfig
+com/example/captcha/di/CaptchaModule_ProvideCaptchaUseCaseFactory.java
+ com.example.captcha.di.CaptchaModule_ProvideCaptchaUseCaseFactory
+com/example/captcha/di/CaptchaModule_ProvideCaptchaRepositoryFactory.java
+ com.example.captcha.di.CaptchaModule_ProvideCaptchaRepositoryFactory
+com/example/captcha/di/CaptchaModule_ProvideGeeTestApiFactory.java
+ com.example.captcha.di.CaptchaModule_ProvideGeeTestApiFactory
+com/example/captcha/data/repository/CaptchaRepositoryImpl_Factory.java
+ com.example.captcha.data.repository.CaptchaRepositoryImpl_Factory
+com/example/captcha/di/CaptchaModule_ProvideOkHttpClientFactory.java
+ com.example.captcha.di.CaptchaModule_ProvideOkHttpClientFactory
+ com.example.captcha.di.CaptchaModule_ProvideOkHttpClientFactory$InstanceHolder
+com/example/captcha/BR.java
+ com.example.captcha.BR
+hilt_aggregated_deps/_com_example_captcha_di_CaptchaModule.java
+ hilt_aggregated_deps._com_example_captcha_di_CaptchaModule
+androidx/databinding/library/baseAdapters/BR.java
+ androidx.databinding.library.baseAdapters.BR
+com/example/captcha/DataBindingTriggerClass.java
+ com.example.captcha.DataBindingTriggerClass
+com/example/captcha/domain/usecase/CaptchaUseCase_Factory.java
+ com.example.captcha.domain.usecase.CaptchaUseCase_Factory
+com/example/captcha/DataBinderMapperImpl.java
+ com.example.captcha.DataBinderMapperImpl
+ com.example.captcha.DataBinderMapperImpl$InnerBrLookup
+ com.example.captcha.DataBinderMapperImpl$InnerLayoutIdLookup
+androidx/databinding/DataBindingComponent.java
+ androidx.databinding.DataBindingComponent

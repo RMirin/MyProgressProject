@@ -1,0 +1,49 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_14_12_2021,_15_54_[Default_Changelist]" date="1639486491857" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_12_2021,_15_54_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 14.12.2021, 15:54 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab_i" />
+    <option name="AFTER_PATH" value="buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab_i" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_12_2021,_15_54_[Default_Changelist]/source-to-output.tab_i" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="buildSrc/build/libs/buildSrc.jar" />
+    <option name="AFTER_PATH" value="buildSrc/build/libs/buildSrc.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_12_2021,_15_54_[Default_Changelist]/buildSrc.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.values.at" />
+    <option name="AFTER_PATH" value="buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.values.at" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_12_2021,_15_54_[Default_Changelist]/source-to-output.tab.values.at" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream.len" />
+    <option name="AFTER_PATH" value="buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream.len" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_12_2021,_15_54_[Default_Changelist]/source-to-output.tab.keystream.len" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i" />
+    <option name="AFTER_PATH" value="buildSrc/build/kotlin/compileKotlin/caches-jvm/jvm/kotlin/source-to-classes.tab_i" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_12_2021,_15_54_[Default_Changelist]/source-to-classes.tab_i" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="buildSrc/build/kotlin/compileKotlin/last-build.bin" />
+    <option name="AFTER_PATH" value="buildSrc/build/kotlin/compileKotlin/last-build.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_12_2021,_15_54_[Default_Changelist]/last-build.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="buildSrc/build/kotlin/compileKotlin/build-history.bin" />
+    <option name="AFTER_PATH" value="buildSrc/build/kotlin/compileKotlin/build-history.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_12_2021,_15_54_[Default_Changelist]/build-history.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream" />
+    <option name="AFTER_PATH" value="buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab.keystream" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_12_2021,_15_54_[Default_Changelist]/source-to-output.tab.keystream" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab" />
+    <option name="AFTER_PATH" value="buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_14_12_2021,_15_54_[Default_Changelist]/source-to-output.tab" />
+  </binary>
+</changelist>
