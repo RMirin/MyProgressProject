@@ -56,7 +56,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":core"))
-    implementation(project(":authcaptcha"))
+    implementation(project(":recaptcha"))
 
     //Base
     implementation(Dependencies.androidxCoreCoreKtx)
@@ -97,4 +97,7 @@ dependencies {
     implementation 'com.tradingview:lightweightcharts:3.6.1'
 
     implementation 'com.geetest.sensebot:sensebot:4.3.5.1'
+
+    //Captcha
+    implementation 'com.google.android.gms:play-services-safetynet:18.0.1'
 }

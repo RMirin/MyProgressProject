@@ -2,6 +2,7 @@ package com.example.myprogressproject.ui.crypto
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -21,8 +22,9 @@ import com.geetest.sdk.GT3GeetestUtils
 import java.lang.RuntimeException
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.compose.authcaptcha.base.BaseGT3Listener
-import com.compose.authcaptcha.base.State
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.CommonStatusCodes
+import com.google.android.gms.safetynet.SafetyNet
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -60,9 +62,9 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecycler()
-        observeData(gt3ConfigBean)
+        observeData()
         initView()
-        initCaptcha()
+//        initCaptcha()
     }
 
     private fun initView() {
@@ -101,27 +103,62 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
         }
     }
 
-    private fun initCaptcha() {
-        with(gt3ConfigBean) {
-            pattern = 1
-            isCanceledOnTouchOutside = false
-            //Change dialog language
-            lang = "EN"
-            timeout = 10000
-            webviewTimeout = 10000
-            listener = object : BaseGT3Listener() {
+    private fun startAuthCaptcha() {
+        SafetyNet.getClient(requireActivity()).verifyWithRecaptcha("6LeJYzMeAAAAAAI9NcPv_Zw9QWX69TnEjlNtyx15")
+            .addOnSuccessListener { recaptchaTokenResponse ->
+                // Indicates communication with reCAPTCHA service was
+                // successful.
+                val userResponseToken = recaptchaTokenResponse.tokenResult
+                if (!userResponseToken!!.isEmpty()) {
+                    // Validate the user response token using the
+                    // reCAPTCHA siteverify API.
+                    Log.e("TAG", "VALIDATION STEP NEEDED")
 
-                override fun onReceiveCaptchaCode(captcha: Int) {
-                    //captcha: 0 - failed, 1 - passed
-                    if (captcha == 1) {
-                        Toast.makeText((activity as MainActivity), "captcha passed", Toast.LENGTH_SHORT).show()
-                        gt3GeetestUtils.dismissGeetestDialog()
-                    }
+                    cryptoListViewModel.getRecaptchaValidation(
+                        userResponseToken,
+                        "6LeJYzMeAAAAAOVOQOXtPGhn-IsHYhP34taYo8-i"
+                    )
                 }
             }
-        }
-        gt3GeetestUtils.init(gt3ConfigBean)
+            .addOnFailureListener { e ->
+                if (e is ApiException) {
+                    // An error occurred when communicating with the
+                    // reCAPTCHA service. Refer to the status code to
+                    // handle the error appropriately.
+                    val apiException = e as ApiException
+                    val statusCode = apiException.statusCode
+                    Log.e(
+                        "TAG", "Error: " + CommonStatusCodes
+                            .getStatusCodeString(statusCode)
+                    )
+                } else {
+                    // A different, unknown type of error occurred.
+                    Log.e("TAG", "Error: " + e.message)
+                }
+            }
     }
+
+//    private fun initCaptcha() {
+//        with(gt3ConfigBean) {
+//            pattern = 1
+//            isCanceledOnTouchOutside = false
+//            //Change dialog language
+//            lang = "EN"
+//            timeout = 10000
+//            webviewTimeout = 10000
+//            listener = object : BaseGT3Listener() {
+//
+//                override fun onReceiveCaptchaCode(captcha: Int) {
+//                    //captcha: 0 - failed, 1 - passed
+//                    if (captcha == 1) {
+//                        Toast.makeText((activity as MainActivity), "captcha passed", Toast.LENGTH_SHORT).show()
+//                        gt3GeetestUtils.dismissGeetestDialog()
+//                    }
+//                }
+//            }
+//        }
+//        gt3GeetestUtils.init(gt3ConfigBean)
+//    }
 
     private fun initRecycler() {
         with(binding) {
@@ -137,22 +174,22 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
         visibilityView.visibility = visible
     }
 
-    private fun observeData(configBean: GT3ConfigBean) {
+    private fun observeData() {
         with(cryptoListViewModel) {
             cryptoList.launchWhenStarted(lifecycleScope) { cryptoDataList ->
                 cryptoListAdapter.setData(cryptoDataList)
             }
 
-            uiState.launchWhenStarted(lifecycleScope) { state ->
-                when(state) {
-                    is State.Loading -> {}
-                    is State.Success -> {
-                        configBean.api1Json = state.data
-                        gt3GeetestUtils.getGeetest()
-                    }
-                    is State.Error -> {}
-                }
-            }
+//            uiState.launchWhenStarted(lifecycleScope) { state ->
+//                when(state) {
+//                    is State.Loading -> {}
+//                    is State.Success -> {
+//                        configBean.api1Json = state.data
+//                        gt3GeetestUtils.getGeetest()
+//                    }
+//                    is State.Error -> {}
+//                }
+//            }
         }
     }
 
@@ -160,10 +197,11 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
 
     override fun onCryptoActionClicked(cryptoAction: CryptoAction) {
         if (cryptoAction == CryptoAction.VERIFICATION) {
-            gt3GeetestUtils.startCustomFlow()
-            lifecycleScope.launch(Dispatchers.Main) {
-                cryptoListViewModel.getCaptcha()
-            }
+//            gt3GeetestUtils.startCustomFlow()
+//            lifecycleScope.launch(Dispatchers.Main) {
+//                cryptocryptoListListViewModel.getCaptcha()
+//            }
+            startAuthCaptcha()
         } else {
             Toast.makeText((activity as MainActivity), cryptoAction.name, Toast.LENGTH_SHORT).show()
         }
