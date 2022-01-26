@@ -22,11 +22,10 @@ import com.geetest.sdk.GT3GeetestUtils
 import java.lang.RuntimeException
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.core.extension.observe
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.safetynet.SafetyNet
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActionsListener, FilterBottomSheetListener, CryptoListListener {
@@ -47,10 +46,8 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
         try {
             cryptoListFragmentListener = context as CryptoListFragmentListener
         } catch (ex: RuntimeException) {
-            Toast.makeText(
-                (activity as MainActivity), context.toString()
-                        + " must implement OnFragmentInteractionListener", Toast.LENGTH_SHORT
-            ).show()
+            showToast(context.toString()
+                    + " must implement OnFragmentInteractionListener")
         }
     }
 
@@ -64,7 +61,7 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
         initRecycler()
         observeData()
         initView()
-//        initCaptcha()
+        observeCaptcha()
     }
 
     private fun initView() {
@@ -136,6 +133,24 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
                     Log.e("TAG", "Error: " + e.message)
                 }
             }
+    }
+
+    private fun observeCaptcha() {
+        with(cryptoListViewModel) {
+            observe(userIsHuman) { userIsHuman ->
+                if (userIsHuman) {
+                    showToast("OK captcha is passed")
+                } else {
+                    showToast("NO you're a robot an imitation of life")
+                }
+            }
+        }
+    }
+
+    private fun showToast(text: String) {
+        Toast.makeText(
+            (activity as MainActivity), text, Toast.LENGTH_SHORT
+        ).show()
     }
 
 //    private fun initCaptcha() {

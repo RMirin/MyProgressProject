@@ -2,8 +2,11 @@ package com.example.myprogressproject.ui.crypto
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.core.base.BaseViewModel
+import com.example.core.base.Event
 import com.example.core.base.State
 import com.example.domain.entity.CryptoDataModel
 import com.example.domain.usecases.CryptoUseCase
@@ -24,9 +27,13 @@ class CryptoListViewModel @Inject constructor(
     app: Application
 ): BaseViewModel(app) {
 
-    private val _uiState = MutableStateFlow<NetworkResult<RecaptchaVerifyResponse?>>(NetworkResult.Loading())
+    private val _uiState =
+        MutableStateFlow<NetworkResult<RecaptchaVerifyResponse?>>(NetworkResult.Loading())
     val uiState: MutableStateFlow<NetworkResult<RecaptchaVerifyResponse?>>
         get() = _uiState
+
+    private val _userIsHuman = MutableLiveData(false)
+    val userIsHuman: LiveData<Boolean> get() = _userIsHuman
 
     val cryptoList: StateFlow<List<CryptoDataModel>> = flow {
         cryptoUseCase.getData().collect { cryptoDataModelList ->
@@ -43,20 +50,9 @@ class CryptoListViewModel @Inject constructor(
             val recaptchaVerificationResult =
                 reCaptchaRepository.validateCaptcha(uiState, response, key)
             recaptchaVerificationResult.let { result ->
-                Log.e("TAG", "getRecaptchaValidation: ${result.value.message}")
+                _userIsHuman.postValue(result.value.data?.success ?: false)
+                Log.e("TAG", "getRecaptchaValidation: ${result.value.data}")
             }
         }
     }
-
-//    suspend fun getCaptcha() = authCaptchaUseCase.getCaptchaParams()
-//        .doOnLoading {
-//            _uiState.value = State.Loading
-//        }
-//        .doOnSuccess { jsonObject ->
-//            _uiState.value = State.Success(jsonObject)
-//        }
-//        .doOnError { error ->
-//            _uiState.value = State.Error(error)
-//        }
-//        .launchIn(viewModelScope)
 }
