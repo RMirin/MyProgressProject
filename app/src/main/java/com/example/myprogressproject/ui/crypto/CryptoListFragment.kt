@@ -137,11 +137,13 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding>(), CryptoActi
 
     private fun observeCaptcha() {
         with(cryptoListViewModel) {
-            observe(userIsHuman) { userIsHuman ->
-                if (userIsHuman) {
-                    showToast("OK captcha is passed")
-                } else {
-                    showToast("NO you're a robot an imitation of life")
+            observe(userIsHuman) { event ->
+                event.getContentIfNotHandled()?.let { userIsHuman ->
+                    if (userIsHuman) {
+                        showToast("OK captcha is passed")
+                    } else {
+                        showToast("NO you're a robot an imitation of life")
+                    }
                 }
             }
         }

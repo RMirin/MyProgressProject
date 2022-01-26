@@ -32,8 +32,8 @@ class CryptoListViewModel @Inject constructor(
     val uiState: MutableStateFlow<NetworkResult<RecaptchaVerifyResponse?>>
         get() = _uiState
 
-    private val _userIsHuman = MutableLiveData(false)
-    val userIsHuman: LiveData<Boolean> get() = _userIsHuman
+    private val _userIsHuman = MutableLiveData<Event<Boolean>>()
+    val userIsHuman: MutableLiveData<Event<Boolean>> get() = _userIsHuman
 
     val cryptoList: StateFlow<List<CryptoDataModel>> = flow {
         cryptoUseCase.getData().collect { cryptoDataModelList ->
@@ -50,7 +50,7 @@ class CryptoListViewModel @Inject constructor(
             val recaptchaVerificationResult =
                 reCaptchaRepository.validateCaptcha(uiState, response, key)
             recaptchaVerificationResult.let { result ->
-                _userIsHuman.postValue(result.value.data?.success ?: false)
+                _userIsHuman.value = Event(result.value.data?.success ?: false)
                 Log.e("TAG", "getRecaptchaValidation: ${result.value.data}")
             }
         }
