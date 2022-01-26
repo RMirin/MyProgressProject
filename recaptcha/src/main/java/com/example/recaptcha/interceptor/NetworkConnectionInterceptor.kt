@@ -1,6 +1,5 @@
 package com.example.recaptcha.interceptor
 
-import android.util.Log
 import com.example.recaptcha.exception.NoInternetException
 import com.example.recaptcha.service.NetworkService
 import okhttp3.Interceptor
@@ -14,14 +13,12 @@ class NetworkConnectionInterceptor(
     override fun intercept(chain: Interceptor.Chain): Response {
         try {
             if (!networkService.isNetworkAvailable) {
-                Log.e("TAG", "intercept: 1")
                 throw NoInternetException(RuntimeException())
             }
 
             return chain.proceed(chain.request())
         } catch (e: IOException) {
             if (!networkService.isNetworkAvailable) {
-                Log.e("TAG", "intercept: 2")
                 throw NoInternetException(e)
             }
 
