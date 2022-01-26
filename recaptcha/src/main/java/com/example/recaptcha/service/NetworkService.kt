@@ -31,6 +31,7 @@ class NetworkServiceImpl @Inject constructor(
     private val NetworkCapabilities.hasNetworkCapability: Boolean
         get() = hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) ||
                 hasTransport(NetworkCapabilities.TRANSPORT_WIFI) ||
-                hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
+                hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) ||
+                hasTransport(NetworkCapabilities.TRANSPORT_VPN)
 
 }
