@@ -16,6 +16,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(), CryptoListFragmentListener {
 
+    private var currentProgressPosition = 0
+    private val stepCount = 5
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -25,6 +28,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CryptoListFragmentList
         val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.left_drawer, ordSorFrag)
         fragmentTransaction.commit()
+
+        with(binding) {
+            drawerStepView.setStepsCount(stepCount)
+            drawerStepView.setCurrentStepPosition(currentProgressPosition)
+            button.setOnClickListener {
+                currentProgressPosition++
+                drawerStepView.setCurrentStepPosition(currentProgressPosition)
+            }
+        }
     }
 
     override fun initViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
