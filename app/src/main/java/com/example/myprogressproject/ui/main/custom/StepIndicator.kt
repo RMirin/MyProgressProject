@@ -19,11 +19,11 @@ import com.example.myprogressproject.R
 class StepIndicator : View {
 
     var radius: Int = 0
-    private var pageStrokeAlpha: Int = 0
     private var mLineHeight: Float = 0.toFloat()
     private var strokeWidth: Int = 0
     private var currentStepPosition: Int = 0
     private var stepsCount = 1
+    private var dotSpacing = 0
     private var bgColor: Int = 0
     private var stepColor: Int = 0
     private var currentColor: Int = 0
@@ -32,8 +32,6 @@ class StepIndicator : View {
     private var startX: Int = 0
     private var endX: Int = 0
     private var stepDistance: Int = 0
-    private var offset: Float = 0.toFloat()
-    private var offsetPixel: Int = 0
 
     private var paint: Paint? = null
     private var pStoke: Paint? = null
@@ -79,12 +77,7 @@ class StepIndicator : View {
         pStoke!!.style = Paint.Style.STROKE
         pStoke!!.flags = Paint.ANTI_ALIAS_FLAG
 
-
-        /**
-         * @titleTextSize must not be greater than 19
-         */
-
-        minimumHeight = radius * 7
+        minimumHeight = radius * 2
         Color.colorToHSV(currentColor, hsvCurrent)
         Color.colorToHSV(bgColor, hsvBG)
         Color.colorToHSV(stepColor, hsvProgress)
@@ -101,6 +94,7 @@ class StepIndicator : View {
                 attr.getDimension(R.styleable.StepView_svStrokeWidth, dp2px(DEFAULT_STOKE_WIDTH.toFloat()))
                     .toInt()
             stepsCount = attr.getInt(R.styleable.StepView_svStepCount, DEFAULT_STEP_COUNT)
+            dotSpacing = attr.getDimension(R.styleable.StepView_svDotSpacing, dp2px(8f)).toInt()
             mLineHeight = attr.getDimension(R.styleable.StepView_svLineHeight, DEFAULT_LINE_HEIGHT)
             stepColor = attr.getColor(
                 R.styleable.StepView_svStepColor,
@@ -133,6 +127,15 @@ class StepIndicator : View {
         invalidate()
     }
 
+    fun getDotSpacing(): Int {
+        return dotSpacing
+    }
+
+    fun setDotSpacing(dotSpacing: Int) {
+        this.dotSpacing = dotSpacing
+        invalidate()
+    }
+
     fun getCurrentStepPosition(): Int {
         return currentStepPosition
     }
@@ -152,40 +155,25 @@ class StepIndicator : View {
         super.onDraw(canvas)
 
         /**draw Circle  */
-        var pointX: Int = startX
+        var pointX: Int = (width - ((stepsCount*(radius*2))+(stepsCount-1)*dotSpacing))/2+radius
         for (i in 0 until stepsCount) {
             if (i < currentStepPosition) {
                 //draw previous step
                 paint!!.color = stepColor
                 canvas.drawCircle(pointX.toFloat(), pointY.toFloat(), radius.toFloat(), paint!!)
-
-                //draw transition
-                if (i == currentStepPosition - 1 && offsetPixel < 0) {
-                    pStoke!!.alpha = pageStrokeAlpha
-                    pStoke!!.strokeWidth = (strokeWidth - Math.round(strokeWidth * offset)).toFloat()
-                    canvas.drawCircle(pointX.toFloat(), pointY.toFloat(), radius.toFloat(), pStoke!!)
-                }
             } else {
                 //draw next step
                 paint!!.color = bgColor
                 canvas.drawCircle(pointX.toFloat(), pointY.toFloat(), radius.toFloat(), paint!!)
-
-                //draw transition
-                if (i == currentStepPosition + 1 && offsetPixel > 0) {
-                    pStoke!!.strokeWidth = Math.round(strokeWidth * offset).toFloat()
-                    pStoke!!.alpha = Math.round(offset * pageStrokeAlpha)
-                    canvas.drawCircle(pointX.toFloat(), pointY.toFloat(), radius.toFloat(), pStoke!!)
-                }
-
             }
-            pointX += stepDistance
+            pointX += radius*2+dotSpacing
         }
 
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        pointY = height / 4
+        pointY = height / 2
         startX = radius * 2
         endX = width - radius * 2
         stepDistance = (endX - startX) / (stepsCount - 1)
@@ -201,7 +189,7 @@ class StepIndicator : View {
             measureDimension(desiredHeight, heightMeasureSpec)
         )
 
-        pointY = height / 4
+        pointY = height / 2
 
         startX = radius * 2
         endX = width - radius * 2
@@ -236,6 +224,7 @@ class StepIndicator : View {
         ss?.strokeWidth = this.strokeWidth
         ss?.currentStepPosition = this.currentStepPosition
         ss?.stepsCount = this.stepsCount
+        ss?.dotSpacing = this.dotSpacing
         ss?.backgroundColor = this.bgColor
         ss?.stepColor = this.stepColor
         ss?.currentColor = this.currentColor
@@ -254,6 +243,7 @@ class StepIndicator : View {
         this.strokeWidth = state.strokeWidth
         this.currentStepPosition = state.currentStepPosition
         this.stepsCount = state.stepsCount
+        this.dotSpacing = state.dotSpacing
         this.bgColor = state.backgroundColor
         this.stepColor = state.stepColor
         this.currentColor = state.currentColor
@@ -265,20 +255,11 @@ class StepIndicator : View {
         var strokeWidth: Int = 0
         var currentStepPosition: Int = 0
         var stepsCount: Int = 0
+        var dotSpacing: Int = 0
         var backgroundColor: Int = 0
         var stepColor: Int = 0
         var currentColor: Int = 0
-        var textColor: Int = 0
-        var secondaryTextColor: Int = 0
-        var titleTextSize: Int = 0
         var pageStrokeAlpha: Int = 0
-        var pageTitleId: Int = 0
-        var titleClickable: Int = 0
-
-        var pageActiveTitleColor: Int = 0
-        var pageInActiveTitleColor: Int = 0
-        var textTypeFace: Int = 0
-        var textBottomAlign: Int = 0
 
         constructor(superState: Parcelable) : super(superState)
 
@@ -288,19 +269,11 @@ class StepIndicator : View {
             strokeWidth = `in`.readInt()
             currentStepPosition = `in`.readInt()
             stepsCount = `in`.readInt()
+            dotSpacing = `in`.readInt()
             backgroundColor = `in`.readInt()
             stepColor = `in`.readInt()
             currentColor = `in`.readInt()
-            textColor = `in`.readInt()
-            secondaryTextColor = `in`.readInt()
-            titleTextSize = `in`.readInt()
-            pageActiveTitleColor = `in`.readInt()
-            pageInActiveTitleColor = `in`.readInt()
             pageStrokeAlpha = `in`.readInt()
-            pageTitleId = `in`.readInt()
-            titleClickable = `in`.readInt()
-            textTypeFace = `in`.readInt()
-            textBottomAlign = `in`.readInt()
         }
 
         override fun writeToParcel(dest: Parcel, flags: Int) {
@@ -310,19 +283,11 @@ class StepIndicator : View {
             dest.writeInt(strokeWidth)
             dest.writeInt(currentStepPosition)
             dest.writeInt(stepsCount)
+            dest.writeInt(dotSpacing)
             dest.writeInt(backgroundColor)
             dest.writeInt(stepColor)
             dest.writeInt(currentColor)
-            dest.writeInt(textColor)
-            dest.writeInt(secondaryTextColor)
-            dest.writeInt(titleTextSize)
-            dest.writeInt(pageActiveTitleColor)
-            dest.writeInt(pageInActiveTitleColor)
             dest.writeInt(pageStrokeAlpha)
-            dest.writeInt(pageTitleId)
-            dest.writeInt(titleClickable)
-            dest.writeInt(textTypeFace)
-            dest.writeInt(textBottomAlign)
         }
 
         companion object {
