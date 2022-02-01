@@ -28,6 +28,7 @@ class StepIndicator : View {
     private var stepColor: Int = 0
     private var currentColor: Int = 0
 
+    private var pointX: Int = 0
     private var pointY: Int = 0
     private var startX: Int = 0
     private var endX: Int = 0
@@ -174,6 +175,7 @@ class StepIndicator : View {
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         pointY = height / 2
+        pointX = width / 2
         startX = radius * 2
         endX = width - radius * 2
         stepDistance = (endX - startX) / (stepsCount - 1)
@@ -181,7 +183,7 @@ class StepIndicator : View {
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val desiredWidth = suggestedMinimumWidth + paddingLeft + paddingRight
+        val desiredWidth = ((stepsCount*(radius*2))+(stepsCount-1)*dotSpacing)
         val desiredHeight = suggestedMinimumHeight + paddingTop + paddingBottom
 
         setMeasuredDimension(
@@ -189,10 +191,12 @@ class StepIndicator : View {
             measureDimension(desiredHeight, heightMeasureSpec)
         )
 
+        pointX = width / 2
         pointY = height / 2
 
         startX = radius * 2
         endX = width - radius * 2
+
         stepDistance = (endX - startX) / (stepsCount - 1)
     }
 
