@@ -22,4 +22,15 @@
 
     <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
 
+        <declare-styleable name="StepView">
+            <attr name="svStepCount" format="integer" />
+            <attr name="svRadius" format="dimension" />
+            <attr name="svStrokeWidth" format="dimension" />
+            <attr name="svDotSpacing" format="dimension"/>
+            <attr name="svStepColor" format="color" />
+            <attr name="svCurrentStepColor" format="color" />
+            <attr name="svBackgroundColor" format="color" />
+            <attr name="svLineHeight" format="dimension" />
+        </declare-styleable>
+
 </resources>

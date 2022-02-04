@@ -3,4 +3,10 @@
     <color name="colorPrimary">#455A64</color>
     <color name="colorPrimaryDark">#455A64</color>
     <color name="colorAccent">#536DFE</color>
+
+
+    <!-- Step Indicator -->
+
+    <color name="step_indicator_active">#6C49FC</color>
+    <color name="step_indicator_inactive">#B6BEE3</color>
 </resources>
